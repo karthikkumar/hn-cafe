@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Box, Container, Flex, Heading, VStack } from "@chakra-ui/react";
+import NewsCard from "./components/NewsCard";
+import DateHeader from "./components/DateHeader";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box backgroundColor="blue.800">
+      <Container maxWidth="container.xl" padding={5}>
+        <Flex height="96vh" py={0}>
+          <VStack width="200px" height="full" paddingX={10}>
+            <Heading color="gray.600">KOFFEE NEWS</Heading>
+          </VStack>
+          <VStack
+            width="800px"
+            height="full"
+            padding={5}
+            backgroundColor="blue.900"
+            borderRadius="lg"
+          >
+            <DateHeader />
+            <NewsCard />
+          </VStack>
+        </Flex>
+      </Container>
+    </Box>
   );
 }
 
