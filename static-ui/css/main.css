@@ -43,11 +43,11 @@
   box-sizing: border-box; }
 
 body {
-  background-color: #152238; }
+  background-color: #152238;
+  overflow: hidden; }
 
 .container {
   max-width: 1080px;
-  height: 100vh;
   padding: 0 1rem;
   margin: 0.5rem auto;
   overflow: hidden; }
@@ -80,7 +80,8 @@ body {
           position: absolute;
           left: -40px; }
   #sidebar-left #settings {
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
     text-align: center; }
     #sidebar-left #settings a {
       color: #f0bd27;
@@ -110,7 +111,7 @@ body {
   #sidebar-right #brewer {
     font-family: "Poppins", sans-serif;
     line-height: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     padding: 0.5rem 1rem; }
     #sidebar-right #brewer small {
       color: #fff;
@@ -123,7 +124,7 @@ body {
 #news-list {
   padding: 1rem;
   margin: 0.5rem;
-  height: 100vh;
+  height: calc(100vh - 2rem);
   border-radius: 8px;
   background-color: #0e182a; }
   #news-list .date-header {

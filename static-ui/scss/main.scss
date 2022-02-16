@@ -9,11 +9,11 @@
 
 body {
   background-color: $dim-blue;
+  overflow: hidden;
 }
 
 .container {
   max-width: $website-width;
-  height: 100vh;
   padding: 0 1rem;
   margin: 0.5rem auto;
   overflow: hidden;
@@ -57,7 +57,8 @@ body {
   }
 
   #settings {
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
     text-align: center;
     a {
       color: $yellow;
@@ -98,7 +99,7 @@ body {
   #brewer {
     font-family: $logo-font;
     line-height: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     padding: 0.5rem 1rem;
 
     small {
@@ -116,7 +117,7 @@ body {
 #news-list {
   padding: 1rem;
   margin: 0.5rem;
-  height: 100vh;
+  height: calc(100vh - 2rem);
   border-radius: 8px;
   background-color: $dark-blue;
 
