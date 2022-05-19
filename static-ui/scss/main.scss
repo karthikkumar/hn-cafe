@@ -120,6 +120,10 @@ body {
   height: calc(100vh - 2rem);
   border-radius: 8px;
   background-color: $dark-blue;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   .date-header {
     color: $yellow;

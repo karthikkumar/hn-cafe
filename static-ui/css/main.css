@@ -126,7 +126,10 @@ body {
   margin: 0.5rem;
   height: calc(100vh - 2rem);
   border-radius: 8px;
-  background-color: #0e182a; }
+  background-color: #0e182a;
+  overflow-y: auto; }
+  #news-list::-webkit-scrollbar {
+    display: none; }
   #news-list .date-header {
     color: #f0bd27;
     font-family: "Quicksand", sans-serif;
