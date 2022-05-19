@@ -25,7 +25,7 @@ function NewsList() {
       <div className="date-group">
         <DateHeader />
         {data?.map((item, index) => (
-          <NewsItem rank={index + 1} {...item} />
+          <NewsItem rank={index + 1} {...item} key={item.id} />
         ))}
         <Divider />
       </div>
