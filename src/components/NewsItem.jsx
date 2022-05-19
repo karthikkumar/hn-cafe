@@ -1,12 +1,9 @@
-function NewsItem() {
+function NewsItem({ rank, title, by, score, descendants }) {
   return (
     <div className="item">
-      <div className="rank">1</div>
+      <div className="rank">{rank}</div>
       <div className="news">
-        <h3>
-          Facebook adds 5 divs, 9 spans and 30 CSS classes to every post in the
-          timeline
-        </h3>
+        <h3>{title}</h3>
         <div className="news-info">
           <div className="news-info-left">
             <small className="site">
@@ -14,7 +11,8 @@ function NewsItem() {
             </small>
             <small className="author">
               <p>
-                by<a href="#"> karthikkumar</a>
+                by
+                <a href={`https://news.ycombinator.com/user?id=${by}`}>{by}</a>
               </p>
             </small>
           </div>
@@ -24,10 +22,10 @@ function NewsItem() {
               <p>5 hours ago</p>
             </small>
             <small className="points">
-              <p>692 points</p>
+              <p>{score} points</p>
             </small>
             <small className="comments">
-              <p>53 comments</p>
+              <p>{descendants} comments</p>
             </small>
             {/* <img src="img/Y.png" alt="" /> */}
           </div>
