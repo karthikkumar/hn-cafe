@@ -131,6 +131,19 @@ body {
     font-size: 0.9rem;
     text-align: end;
     padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-around;
+
+    .line {
+      height: 1px;
+      width: 100%;
+      background-color: $yellow-lite;
+      margin: 0.6rem;
+    }
+
+    p {
+      flex-shrink: 0;
+    }
   }
 
   .item {

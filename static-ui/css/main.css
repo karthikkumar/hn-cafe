@@ -135,7 +135,16 @@ body {
     font-family: "Quicksand", sans-serif;
     font-size: 0.9rem;
     text-align: end;
-    padding: 0.5rem 1rem; }
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-around; }
+    #news-list .date-header .line {
+      height: 1px;
+      width: 100%;
+      background-color: #f0bd273d;
+      margin: 0.6rem; }
+    #news-list .date-header p {
+      flex-shrink: 0; }
   #news-list .item {
     display: flex;
     justify-content: flex-start;
