@@ -6,15 +6,6 @@ import NewsItem from "./NewsItem";
 import DateHeader from "./DateHeader";
 import { getStories } from "../utils/api";
 
-const getTodayParam = () => {
-  const today = moment();
-  return {
-    date: today,
-    startTime: today.startOf("date").unix(),
-    endTime: today.endOf("date").unix(),
-  };
-};
-
 function NewsList() {
   const {
     status,
@@ -26,20 +17,17 @@ function NewsList() {
   } = useInfiniteQuery(
     "storiesByDate",
     async ({ pageParam }) => {
-      const { date, startTime, endTime } = pageParam || getTodayParam();
+      const { date, startTime, endTime } = pageParam || {
+        date: moment(),
+        startTime: moment().startOf("date").unix(),
+        endTime: moment().endOf("date").unix(),
+      };
       const stories = await getStories(startTime, endTime);
       return { date, startTime, endTime, stories };
     },
     {
-      getNextPageParam: (lastStoriesByDate, storiesByDates) => {
-        if (!storiesByDates?.length) {
-          const today = moment();
-          return {
-            date: today,
-            startTime: today.startOf("date").unix(),
-            endTime: today.endOf("date").unix(),
-          };
-        } else if (lastStoriesByDate) {
+      getNextPageParam: (lastStoriesByDate) => {
+        if (lastStoriesByDate) {
           const lastDate = lastStoriesByDate.date;
           const previousDate = moment(lastDate).subtract(1, "days");
           return {
@@ -51,6 +39,7 @@ function NewsList() {
       },
     }
   );
+
   const storiesByDates = data?.pages ?? [];
 
   const parentRef = useRef();
@@ -101,7 +90,6 @@ function NewsList() {
           return (
             <div
               key={virtualRow.index}
-              className="date-group"
               style={{
                 position: "absolute",
                 top: 0,
@@ -114,8 +102,8 @@ function NewsList() {
               <DateHeader date={date} />
               {isLoaderRow
                 ? hasNextPage
-                  ? "Loading more..."
-                  : "Nothing more to load"
+                  ? "brewing..."
+                  : "Wow, you've come a long way!"
                 : stories.map((story, index) => (
                     <NewsItem rank={index + 1} {...story} key={story.id} />
                   ))}
