@@ -1,19 +1,11 @@
 import { StateContextProvider } from "./state";
-import LeftSidebar from "./components/LeftSidebar";
-import NewsList from "./components/NewsList";
-import RightSidebar from "./components/RightSidebar";
+import Container from "./components/Container";
 
 function App() {
   return (
-    <div className="container">
-      <StateContextProvider>
-        <div id="layout">
-          <LeftSidebar />
-          <NewsList />
-          <RightSidebar />
-        </div>
-      </StateContextProvider>
-    </div>
+    <StateContextProvider>
+      <Container />
+    </StateContextProvider>
   );
 }
 
