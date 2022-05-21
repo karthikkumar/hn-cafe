@@ -1,8 +1,11 @@
+import moment from "moment";
+
+// images
 import y from "../img/Y.png";
 
 const openLinkProps = { target: "_blank", rel: "noreferrer noopener" };
 
-function NewsItem({ id, rank, title, url, by, score, descendants }) {
+function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
   const { origin, hostname } = url ? new URL(url) : {};
 
   const itemURL = `https://news.ycombinator.com/item?id=${id}`;
@@ -48,7 +51,7 @@ function NewsItem({ id, rank, title, url, by, score, descendants }) {
             }}
           >
             <small className="time">
-              <p>5 hours ago</p>
+              <p>{moment.unix(time).fromNow()}</p>
             </small>
             <small className="points">
               <p>{score} points</p>
