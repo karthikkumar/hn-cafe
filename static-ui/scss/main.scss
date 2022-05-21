@@ -43,6 +43,8 @@ body {
       font-size: 1rem;
       text-align: center;
       width: 20px;
+      margin: 0.3rem 0;
+      border-bottom: 3px solid transparent;
 
       &.current {
         border-bottom: 3px solid $orange;
@@ -166,7 +168,7 @@ body {
         position: absolute;
         width: 1px;
         height: 30px;
-        background-color: $medium-blue;
+        background-color: $blue-lite;
         margin-left: 0.5rem;
       }
     }
