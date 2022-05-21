@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useStateContext } from "../state";
 import { RadioGroup } from "@headlessui/react";
 
 const Option = ({ checked, valueLabel }) => (
@@ -6,10 +6,7 @@ const Option = ({ checked, valueLabel }) => (
 );
 
 function Filter() {
-  let [top, setTop] = useState("5");
-
-  console.log({ top });
-
+  let [top, setTop] = useStateContext();
   return (
     <div id="top">
       <div id="filter">

@@ -5,6 +5,9 @@ import moment from "moment";
 import NewsItem from "./NewsItem";
 import DateHeader from "./DateHeader";
 import { getStories } from "../utils/api";
+import { useStateContext } from "../state";
+
+const FilterSet = { 5: 1, 10: 2, 20: 4, 30: 6 };
 
 function NewsList() {
   const {
@@ -43,11 +46,16 @@ function NewsList() {
   const storiesByDates = data?.pages ?? [];
 
   const parentRef = useRef();
+  const [topFilter] = useStateContext();
+  const top = parseInt(topFilter);
 
   const rowVirtualizer = useVirtual({
     size: storiesByDates.length,
     parentRef,
-    estimateSize: useCallback(() => 560, []),
+    estimateSize: useCallback(
+      () => 500 * FilterSet[top] + (50 - top * 2),
+      [top]
+    ),
   });
 
   useEffect(() => {
@@ -104,9 +112,11 @@ function NewsList() {
                 ? hasNextPage
                   ? "brewing..."
                   : "Wow, you've come a long way!"
-                : stories.map((story, index) => (
-                    <NewsItem rank={index + 1} {...story} key={story.id} />
-                  ))}
+                : stories
+                    .slice(0, top)
+                    .map((story, index) => (
+                      <NewsItem rank={index + 1} {...story} key={story.id} />
+                    ))}
             </div>
           );
         })}
