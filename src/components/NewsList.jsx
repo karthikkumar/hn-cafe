@@ -52,10 +52,7 @@ function NewsList() {
   const rowVirtualizer = useVirtual({
     size: storiesByDates.length,
     parentRef,
-    estimateSize: useCallback(
-      () => 500 * FilterSet[top] + (50 - top * 2),
-      [top]
-    ),
+    estimateSize: useCallback(() => 400 * FilterSet[top] + 50, [top]),
   });
 
   useEffect(() => {
