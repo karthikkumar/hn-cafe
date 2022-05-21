@@ -4,7 +4,7 @@ function DateHeader({ date }) {
   if (!date) {
     return null;
   }
-  const diff = moment().diff(date, "days", true);
+  const diff = parseFloat(moment().diff(date, "days", true).toFixed(2));
   let dateLabel;
   if (diff <= 0) {
     dateLabel = "Today";
