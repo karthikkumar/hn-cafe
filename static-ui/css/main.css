@@ -135,7 +135,7 @@ body {
     font-family: "Quicksand", sans-serif;
     font-size: 0.9rem;
     text-align: end;
-    padding: 0.5rem 1rem;
+    padding: 0 1rem;
     display: flex;
     justify-content: space-around; }
     #news-list .date-header .line {
