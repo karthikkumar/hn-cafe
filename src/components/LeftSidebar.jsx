@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import Filter from "./Filter";
-import { Color } from "./css-vars";
+import { Color } from "../utils/css-vars";
 
 // images
-import mug from "../img/mug.png";
+import mug from "../img/mug@2x.png";
 
 function LeftSidebar() {
   return (
@@ -25,7 +25,7 @@ function LeftSidebar() {
       >
         <button
           css={{
-            width: "40px",
+            width: "44px",
             alignItems: "flex-end",
             backgroundColor: Color.transparent,
             border: 0,
@@ -33,7 +33,7 @@ function LeftSidebar() {
             cursor: "pointer",
           }}
         >
-          <img src={mug} alt="coffee mug icon" width={24} />
+          <img src={mug} alt="coffee mug icon" width={28} />
         </button>
       </div>
     </aside>

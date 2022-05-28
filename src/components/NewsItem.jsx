@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import moment from "moment";
-import { Color, Font } from "./css-vars";
+import { Color, Font } from "../utils/css-vars";
 
 // images
 import y from "../img/Y.png";

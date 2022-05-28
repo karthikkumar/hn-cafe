@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import LeftSidebar from "./LeftSidebar";
 import NewsList from "./NewsList";
-import { Color } from "./css-vars";
+import { Color } from "../utils/css-vars";
 
 function Container() {
   return (

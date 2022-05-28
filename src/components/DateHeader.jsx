@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import PropTypes from "prop-types";
 import moment from "moment";
-import { Color, Font } from "./css-vars";
+import { Color, Font } from "../utils/css-vars";
 function DateHeader({ date }) {
   if (!date) {
     return null;

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useStateContext } from "../state";
 import { RadioGroup } from "@headlessui/react";
-import { Color, Font } from "./css-vars";
+import { Color, Font } from "../utils/css-vars";
 
 const Option = ({ checked, valueLabel }) => (
   <div
