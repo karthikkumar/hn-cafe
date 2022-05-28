@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { useEffect, useRef, useCallback } from "react";
 import { useInfiniteQuery } from "react-query";
 import { useVirtual } from "react-virtual";
@@ -78,11 +79,20 @@ function NewsList() {
   ]);
 
   return (
-    <main id="news-list" ref={parentRef}>
+    <main
+      ref={parentRef}
+      css={{
+        padding: "1rem",
+        margin: "0.5rem",
+        height: "calc(100vh - 2rem)",
+        overflow: "auto",
+      }}
+    >
       <div
-        style={{
+        css={{
           height: `${rowVirtualizer.totalSize}px`,
           width: "100%",
+          maxWidth: "800px",
           position: "relative",
         }}
       >
@@ -95,7 +105,7 @@ function NewsList() {
           return (
             <div
               key={virtualRow.index}
-              style={{
+              css={{
                 position: "absolute",
                 top: 0,
                 left: 0,

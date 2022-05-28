@@ -3,6 +3,9 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+// styles
+import "./styles.scss";
+
 const queryClient = new QueryClient();
 const root = document.getElementById("root");
 render(
