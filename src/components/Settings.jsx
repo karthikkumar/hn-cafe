@@ -40,7 +40,7 @@ const Settings = ({ isOpen, onClose }) => {
           style={{
             backgroundColor: Color.darkBlue,
             width: "960px",
-            height: "380px",
+            height: "400px",
             borderRadius: "10px",
             padding: "2rem 3rem",
           }}
@@ -121,6 +121,26 @@ const Settings = ({ isOpen, onClose }) => {
                 date. Koffee News is for those who want to spend a finite amount
                 of time on catching up tech news.
               </p>
+              <div
+                css={{
+                  margin: "1rem 0",
+                }}
+              >
+                <a
+                  href="https://github.com/karthikkumar/koffee-news/issues/new"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  css={{
+                    textDecoration: "none",
+                    fontFamily: Font.news,
+                    fontSize: "1rem",
+                    color: Color.lightBlue,
+                    cursor: "pointer",
+                  }}
+                >
+                  Feedback
+                </a>
+              </div>
             </div>
             <div
               css={{
@@ -129,17 +149,18 @@ const Settings = ({ isOpen, onClose }) => {
                 paddingLeft: "1rem",
                 lineHeight: "1.2rem",
                 fontSize: "1.2rem",
-                fontFamily: Font.logo,
-                fontWeight: "bold",
                 color: Color.yellow,
                 display: "flex",
                 flexDirection: "column",
                 gap: "2rem",
               }}
             >
-              <div>SETTINGS</div>
+              <div css={{ fontFamily: Font.logo, fontWeight: "600" }}>
+                SETTINGS
+              </div>
               <div
                 css={{
+                  fontFamily: Font.news,
                   fontWeight: 400,
                   fontSize: "1rem",
                   display: "grid",
