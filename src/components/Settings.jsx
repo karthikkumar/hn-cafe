@@ -116,10 +116,10 @@ const Settings = ({ isOpen, onClose }) => {
                   paddingRight: "1rem",
                 }}
               >
-                Why Koffee News? because Y Combinator's Hacker News doesn't have
-                an option to read only the top news (by score) for a given date.
-                Koffee News is for those who want to spend a finite amount of
-                time on catching up tech news.
+                Why Koffee News? because, Y Combinator's Hacker News doesn't
+                have an option to read only the top news (by score) for a given
+                date. Koffee News is for those who want to spend a finite amount
+                of time on catching up tech news.
               </p>
             </div>
             <div
@@ -148,28 +148,33 @@ const Settings = ({ isOpen, onClose }) => {
                   gap: "0.8rem",
                 }}
               >
-                <span>Cache</span>
-                <span
+                <div>Cache</div>
+                <div
                   css={{
                     color: Color.lightBlue,
-                    background: 0,
-                    border: 0,
                     cursor: "pointer",
                   }}
                 >
                   Clear
-                </span>
-                <span>Set time</span>
-                <span
+                </div>
+                <div>Set time</div>
+                <div
                   css={{
                     color: Color.lightBlue,
-                    fontWeight: 400,
-                    fontSize: "1rem",
                     cursor: "pointer",
                   }}
                 >
                   UTC | Browser Time
-                </span>
+                </div>
+                <div>Theme</div>
+                <div
+                  css={{
+                    color: Color.lightBlue,
+                    cursor: "pointer",
+                  }}
+                >
+                  Dark | Light
+                </div>
               </div>
             </div>
             <div
