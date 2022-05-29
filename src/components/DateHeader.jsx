@@ -9,11 +9,11 @@ function DateHeader({ date }) {
   const [hide, setHide] = useState(false);
   const { setStickyHeader } = useStateContext();
 
-  const diff = parseFloat(moment().diff(date, "days", true).toFixed(2));
+  const diff = moment().diff(moment(date).startOf("date"), "days");
   let dateLabel;
-  if (diff <= 0.1) {
+  if (diff === 0) {
     dateLabel = "Today";
-  } else if (diff > 0 && diff < 2) {
+  } else if (diff === 1) {
     dateLabel = "Yesterday";
   } else {
     dateLabel = date.format("D, MMMM");
