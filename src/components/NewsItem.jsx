@@ -36,7 +36,8 @@ function NewsItem({
       timer = setTimeout(() => setShowedLastVisitedOnce(true), 5000);
     }
     return () => clearTimeout(timer);
-  });
+    // eslint-disable-next-line
+  }, [inViewport, isLastVisited]);
 
   if (inViewport && !isVisited) {
     setLocalStorage(LocalStorageKey.CurrentSessionLastVisited, {

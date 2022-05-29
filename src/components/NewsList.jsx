@@ -133,22 +133,13 @@ function NewsList() {
           );
         })}
         {!storiesByDates.length || hasNextPage ? (
-          isFetchingNextPage && isError ? (
-            <Divider
-              message="Brewer has stopped pumping!"
-              style={{
-                fontSize: "0.9rem",
-                position: "absolute",
-                width: "100%",
-                transform: `translateY(${lastItem.end}px)`,
-              }}
-            />
-          ) : (
+          isFetchingNextPage &&
+          !isError && (
             <Loading
               style={{
                 position: "absolute",
                 width: "100%",
-                transform: `translateY(${lastItem.end}px)`,
+                transform: `translateY(${lastItem?.end}px)`,
               }}
             />
           )
@@ -159,7 +150,18 @@ function NewsList() {
               fontSize: "0.9rem",
               position: "absolute",
               width: "100%",
-              transform: `translateY(${lastItem.end}px)`,
+              transform: `translateY(${lastItem?.end}px)`,
+            }}
+          />
+        )}
+        {isFetchingNextPage && isError && (
+          <Divider
+            message="Brewer has stopped pumping!"
+            style={{
+              fontSize: "0.9rem",
+              position: "absolute",
+              width: "100%",
+              transform: `translateY(${lastItem?.end}px)`,
             }}
           />
         )}
