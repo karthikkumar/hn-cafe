@@ -173,7 +173,7 @@ const Settings = ({ isOpen, onClose }) => {
                   gap: "1rem",
                 }}
               >
-                <div>Theme</div>
+                {/* <div>Theme</div>
                 <div
                   css={{
                     color: Color.lightBlue,
@@ -181,8 +181,8 @@ const Settings = ({ isOpen, onClose }) => {
                   }}
                 >
                   Dark | Light
-                </div>
-                <div>Set time</div>
+                </div> */}
+                {/* <div>Set time</div>
                 <div
                   css={{
                     color: Color.lightBlue,
@@ -190,7 +190,16 @@ const Settings = ({ isOpen, onClose }) => {
                   }}
                 >
                   UTC | Browser Time
-                </div>
+                </div> */}
+                {/* <div>Filters</div>
+                <div
+                  css={{
+                    color: Color.lightBlue,
+                    cursor: "pointer",
+                  }}
+                >
+                  Show HN | Ask HN | Tell HN
+                </div> */}
                 <div>Cache</div>
                 <div
                   css={{
