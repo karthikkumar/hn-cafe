@@ -4,7 +4,13 @@ const StateContext = createContext();
 
 function StateContextProvider(props) {
   const [top, setTop] = useState("5");
-  return <StateContext.Provider value={[top, setTop]} {...props} />;
+  const [showedLastVisitedOnce, setShowedLastVisitedOnce] = useState(false);
+  return (
+    <StateContext.Provider
+      value={{ top, setTop, showedLastVisitedOnce, setShowedLastVisitedOnce }}
+      {...props}
+    />
+  );
 }
 
 const useStateContext = () => useContext(StateContext);

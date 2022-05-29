@@ -47,13 +47,13 @@ function NewsList() {
   const storiesByDates = data?.pages ?? [];
 
   const parentRef = useRef();
-  const [topFilter] = useStateContext();
-  const top = parseInt(topFilter);
+  const state = useStateContext();
+  const top = parseInt(state.top);
 
   const rowVirtualizer = useVirtual({
     size: storiesByDates.length,
     parentRef,
-    estimateSize: useCallback(() => 380 * FilterSet[top] + 50, [top]),
+    estimateSize: useCallback(() => 380 * FilterSet[top] + 70, [top]),
   });
 
   useEffect(() => {
@@ -122,7 +122,12 @@ function NewsList() {
                 : stories
                     .slice(0, top)
                     .map((story, index) => (
-                      <NewsItem rank={index + 1} {...story} key={story.id} />
+                      <NewsItem
+                        rank={index + 1}
+                        {...story}
+                        key={story.id}
+                        displayDate={moment(date).format("DD-MM-YYYY")}
+                      />
                     ))}
             </div>
           );

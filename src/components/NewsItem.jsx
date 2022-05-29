@@ -1,13 +1,53 @@
 /** @jsxImportSource @emotion/react */
+import { useEffect, useRef, useState } from "react";
 import moment from "moment";
 import { Color, Font } from "../utils/css-vars";
+import { useIntersection } from "../utils/hooks";
+import Divider from "./Divider";
+import { LocalStorageKey, getLocalStorage, setLocalStorage } from "../utils";
+import { useStateContext } from "../state";
 
 // images
 import y from "../img/Y.png";
 
 const openLinkProps = { target: "_blank", rel: "noreferrer noopener" };
 
-function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
+function NewsItem({
+  id,
+  rank,
+  title,
+  url,
+  by,
+  score,
+  time,
+  descendants,
+  displayDate,
+}) {
+  const ref = useRef();
+  const inViewport = useIntersection(ref, "-70px");
+  const [isVisited, setIsVisited] = useState(false);
+  const { showedLastVisitedOnce, setShowedLastVisitedOnce } = useStateContext();
+  const lastVisited = getLocalStorage(LocalStorageKey.LastSessionLastVisited);
+  const isLastVisited = id === lastVisited?.id && rank === lastVisited?.rank;
+
+  useEffect(() => {
+    let timer;
+    if (inViewport && isLastVisited) {
+      timer = setTimeout(() => setShowedLastVisitedOnce(true), 5000);
+    }
+    return () => clearTimeout(timer);
+  });
+
+  if (inViewport && !isVisited) {
+    setLocalStorage(LocalStorageKey.CurrentSessionLastVisited, {
+      id,
+      rank,
+      time,
+      displayDate,
+    });
+    setIsVisited(true);
+  }
+
   const { origin, hostname } = url ? new URL(url) : {};
 
   const itemURL = `https://news.ycombinator.com/item?id=${id}`;
@@ -16,141 +56,147 @@ function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
   };
 
   return (
-    <div
-      css={{
-        display: "flex",
-        justifyContent: "flex-start",
-        padding: "0.5rem 1rem",
-        margin: "0.5rem 0",
-        borderRadius: "8px",
-        ":hover": {
-          backgroundColor: Color.dimBlue,
-          "#hidden": {
-            visibility: "visible",
-          },
-        },
-      }}
-    >
+    <>
       <div
-        css={{
-          color: Color.white,
-          fontSize: "1rem",
-          fontFamily: Font.news,
-          fontWeight: "bold",
-          position: "relative",
-          marginRight: "0.5rem",
-          "::after": {
-            content: `""`,
-            position: "absolute",
-            width: "1px",
-            height: "30px",
-            backgroundColor: Color.blueLite,
-            marginLeft: "0.5rem",
-          },
-        }}
-      >
-        {rank}
-      </div>
-      <div
+        ref={ref}
         css={{
           display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-          padding: "0 1rem",
-          width: "100%",
+          justifyContent: "flex-start",
+          padding: "0.5rem 1rem",
+          margin: "0.5rem 0",
+          borderRadius: "8px",
+          ":hover": {
+            backgroundColor: Color.dimBlue,
+            "#hidden": {
+              visibility: "visible",
+            },
+          },
         }}
       >
-        <a
-          href={url || itemURL}
-          {...openLinkProps}
+        <div
           css={{
-            textDecoration: "none",
             color: Color.white,
+            fontSize: "1rem",
             fontFamily: Font.news,
-            fontWeight: 500,
-            cursor: "pointer",
+            fontWeight: "bold",
+            position: "relative",
+            marginRight: "0.5rem",
+            "::after": {
+              content: `""`,
+              position: "absolute",
+              width: "1px",
+              height: "30px",
+              backgroundColor: Color.blueLite,
+              marginLeft: "0.5rem",
+            },
           }}
         >
-          {title}
-        </a>
+          {rank}
+        </div>
         <div
           css={{
             display: "flex",
-            justifyContent: "space-between",
-            fontFamily: Font.news,
-            fontWeight: 400,
-            color: Color.white,
+            flexDirection: "column",
+            gap: "1rem",
+            padding: "0 1rem",
+            width: "100%",
           }}
         >
-          <div css={{ display: "flex", alignItems: "flex-end" }}>
-            {url && (
-              <small css={{ color: Color.lightBlue, marginRight: "1rem" }}>
-                <a
-                  href={origin}
-                  {...openLinkProps}
-                  css={{ textDecoration: "none", color: Color.lightBlue }}
-                >
-                  {hostname}
-                </a>
-              </small>
-            )}
-            <small id="hidden" css={{ visibility: "hidden" }}>
-              <p>
-                {`by `}
-                <a
-                  href={`https://news.ycombinator.com/user?id=${by}`}
-                  {...openLinkProps}
-                  css={{ textDecoration: "none", color: Color.lightBlue }}
-                >
-                  {by}
-                </a>
-              </p>
-            </small>
-          </div>
-
-          <div
-            id="hidden"
+          <a
+            href={url || itemURL}
+            {...openLinkProps}
             css={{
-              visibility: "hidden",
-              display: "flex",
-              alignItems: "flex-end",
-              gap: "1rem",
+              textDecoration: "none",
+              color: Color.white,
+              fontFamily: Font.news,
+              fontWeight: 500,
               cursor: "pointer",
             }}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              handleItemClick();
+          >
+            {title}
+          </a>
+          <div
+            css={{
+              display: "flex",
+              justifyContent: "space-between",
+              fontFamily: Font.news,
+              fontWeight: 400,
+              color: Color.white,
             }}
           >
-            <small css={{ color: Color.yellow }}>
-              <p>{moment.unix(time).fromNow()}</p>
-            </small>
-            <small css={{ color: Color.pointsColor }}>
-              <p>{score} points</p>
-            </small>
-            <small css={{ color: Color.commentsColor }}>
-              <p>{descendants} comments</p>
-            </small>
-            <a
-              href={itemURL}
-              {...openLinkProps}
-              css={{ textDecoration: "none", height: "15px" }}
+            <div css={{ display: "flex", alignItems: "flex-end" }}>
+              {url && (
+                <small css={{ color: Color.lightBlue, marginRight: "1rem" }}>
+                  <a
+                    href={origin}
+                    {...openLinkProps}
+                    css={{ textDecoration: "none", color: Color.lightBlue }}
+                  >
+                    {hostname}
+                  </a>
+                </small>
+              )}
+              <small id="hidden" css={{ visibility: "hidden" }}>
+                <p>
+                  {`by `}
+                  <a
+                    href={`https://news.ycombinator.com/user?id=${by}`}
+                    {...openLinkProps}
+                    css={{ textDecoration: "none", color: Color.lightBlue }}
+                  >
+                    {by}
+                  </a>
+                </p>
+              </small>
+            </div>
+
+            <div
+              id="hidden"
+              css={{
+                visibility: "hidden",
+                display: "flex",
+                alignItems: "flex-end",
+                gap: "1rem",
+                cursor: "pointer",
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleItemClick();
+              }}
             >
-              <img
-                src={y}
-                alt="y combinator"
-                css={{
-                  width: "15px",
-                  cursor: "pointer",
-                  ":hover": { opacity: 0.8 },
-                }}
-              />
-            </a>
+              <small css={{ color: Color.yellow }}>
+                <p>{moment.unix(time).fromNow()}</p>
+              </small>
+              <small css={{ color: Color.pointsColor }}>
+                <p>{score} points</p>
+              </small>
+              <small css={{ color: Color.commentsColor }}>
+                <p>{descendants} comments</p>
+              </small>
+              <a
+                href={itemURL}
+                {...openLinkProps}
+                css={{ textDecoration: "none", height: "15px" }}
+              >
+                <img
+                  src={y}
+                  alt="y combinator"
+                  css={{
+                    width: "15px",
+                    cursor: "pointer",
+                    ":hover": { opacity: 0.8 },
+                  }}
+                />
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      {!showedLastVisitedOnce && isLastVisited && (
+        <Divider name="LAST VISITED" />
+      )}
+    </>
   );
 }
 

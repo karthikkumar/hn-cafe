@@ -23,7 +23,7 @@ const Option = ({ checked, valueLabel }) => (
 );
 
 function Filter() {
-  const [top, setTop] = useStateContext();
+  const { top, setTop } = useStateContext();
   return (
     <div
       css={{

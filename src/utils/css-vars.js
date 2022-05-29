@@ -5,6 +5,7 @@ export const Color = {
   lightBlue: "#81a7ff",
   blueLite: "#426d9f6b",
   orange: "#f44b24",
+  orangeLite: "#f44b2469",
   yellow: "#f0bd27",
   yellowLite: "#f0bd273d",
   pointsColor: "#b8e986",
