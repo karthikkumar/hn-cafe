@@ -11,6 +11,7 @@ import { StoreDateFormat } from "../constants";
 import Loading from "./Loading";
 import Divider from "./Divider";
 import Error from "./Error";
+import { Color } from "../utils/css-vars";
 
 const FilterSet = { 5: 1, 10: 2, 20: 4, 30: 6 };
 
@@ -88,10 +89,12 @@ function NewsList() {
     <main
       ref={parentRef}
       css={{
-        padding: "1rem",
-        margin: "0.5rem",
-        height: "calc(100vh - 2rem)",
-        overflow: "auto",
+        marginLeft: "1.5rem",
+        height: "calc(100vh - 1rem)",
+        overflowY: "auto",
+        overflowX: "hidden",
+        borderTop: `1rem solid ${Color.darkBlue}`,
+        borderBottom: `0.5rem solid ${Color.darkBlue}`,
       }}
     >
       <div

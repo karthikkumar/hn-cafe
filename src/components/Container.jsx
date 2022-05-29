@@ -67,7 +67,8 @@ function Container() {
     >
       <div
         css={{
-          minHeight: "96vh",
+          backgroundColor: Color.darkBlue,
+          minHeight: "calc(100vh - 1rem)",
           margin: "0.5rem auto",
           display: "grid",
           gridTemplateColumns: "3fr 7fr",
