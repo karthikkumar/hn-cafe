@@ -12,6 +12,7 @@ import Loading from "./Loading";
 import Divider from "./Divider";
 import Error from "./Error";
 import { Color } from "../utils/css-vars";
+import StickyHeader from "./StickyHeader";
 
 const FilterSet = { 5: 1, 10: 2, 20: 4, 30: 6 };
 
@@ -107,6 +108,7 @@ function NewsList() {
       >
         {!storiesByDates.length && isLoading && <Loading />}
         {!storiesByDates.length && isError && <Error />}
+        {state.stickyHeader && <StickyHeader title={state.stickyHeader} />}
         {rowVirtualizer.virtualItems.map((virtualRow) => {
           const { date, stories } = storiesByDates.length
             ? storiesByDates[virtualRow.index]

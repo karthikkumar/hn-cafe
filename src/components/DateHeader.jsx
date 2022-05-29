@@ -1,41 +1,69 @@
 /** @jsxImportSource @emotion/react */
+import { useRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import { Color, Font } from "../utils/css-vars";
+import { useStateContext } from "../state";
 function DateHeader({ date }) {
-  if (!date) {
-    return null;
-  }
-  const diff = parseFloat(moment().diff(date, "days", true).toFixed(1));
+  const headerRef = useRef();
+  const [hide, setHide] = useState(false);
+  const { setStickyHeader } = useStateContext();
+
+  const diff = parseFloat(moment().diff(date, "days", true).toFixed(2));
   let dateLabel;
-  if (diff <= 0) {
+  if (diff <= 0.1) {
     dateLabel = "Today";
-  } else if (diff > 0 && diff < 1) {
+  } else if (diff > 0 && diff < 2) {
     dateLabel = "Yesterday";
   } else {
     dateLabel = date.format("D, MMMM");
   }
+
+  // eslint-disable-next-line
+  useEffect(() => {
+    const { top } = headerRef.current?.getBoundingClientRect();
+    if (top < 50) {
+      setHide(true);
+      setStickyHeader(dateLabel);
+    } else {
+      setHide(false);
+    }
+  });
+
+  if (!date) {
+    return null;
+  }
+
   return (
     <div
+      ref={headerRef}
       css={{
-        color: Color.yellow,
-        fontFamily: Font.news,
-        fontSize: "0.9rem",
-        textAlign: "start",
-        padding: "0 1rem",
-        display: "flex",
-        justifyContent: "space-around",
+        height: "1.2rem",
+        backgroundColor: Color.darkBlue,
+        visibility: hide ? "hidden" : "visible",
       }}
     >
-      <span
+      <div
         css={{
-          height: "1px",
-          width: "100%",
-          backgroundColor: Color.yellowLite,
-          margin: "0.6rem",
+          color: Color.yellow,
+          fontFamily: Font.news,
+          fontSize: "0.9rem",
+          textAlign: "start",
+          padding: "0 1rem",
+          display: "flex",
+          justifyContent: "space-around",
         }}
-      ></span>
-      <p css={{ flexShrink: 0 }}>{dateLabel}</p>
+      >
+        <span
+          css={{
+            height: "1px",
+            width: "100%",
+            backgroundColor: Color.yellowLite,
+            margin: "0.6rem",
+          }}
+        ></span>
+        <p css={{ flexShrink: 0 }}>{dateLabel}</p>
+      </div>
     </div>
   );
 }
