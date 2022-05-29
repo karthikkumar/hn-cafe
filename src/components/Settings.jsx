@@ -168,23 +168,19 @@ const Settings = ({ isOpen, onClose }) => {
                   fontWeight: 400,
                   fontSize: "1rem",
                   display: "grid",
-                  gridTemplateColumns: "1fr 4fr",
+                  gridTemplateColumns: "1fr 3fr",
                   gridTemplateRowss: "1fr",
-                  gap: "0.8rem",
+                  gap: "1rem",
                 }}
               >
-                <div>Cache</div>
+                <div>Theme</div>
                 <div
                   css={{
                     color: Color.lightBlue,
                     cursor: "pointer",
                   }}
-                  onClick={() => {
-                    localStorage.clear();
-                    queryClient.clear();
-                  }}
                 >
-                  Clear
+                  Dark | Light
                 </div>
                 <div>Set time</div>
                 <div
@@ -195,14 +191,29 @@ const Settings = ({ isOpen, onClose }) => {
                 >
                   UTC | Browser Time
                 </div>
-                <div>Theme</div>
+                <div>Cache</div>
                 <div
                   css={{
                     color: Color.lightBlue,
                     cursor: "pointer",
                   }}
+                  onClick={() => {
+                    queryClient.clear();
+                  }}
                 >
-                  Dark | Light
+                  Clear
+                </div>
+                <div>Preferences</div>
+                <div
+                  css={{
+                    color: Color.lightBlue,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    localStorage.clear();
+                  }}
+                >
+                  Reset
                 </div>
               </div>
             </div>
