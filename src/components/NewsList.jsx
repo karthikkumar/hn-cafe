@@ -8,12 +8,14 @@ import DateHeader from "./DateHeader";
 import { getStories } from "../utils/api";
 import { useStateContext } from "../state";
 import { StoreDateFormat } from "../constants";
+import Loading from "./Loading";
+import Divider from "./Divider";
 
 const FilterSet = { 5: 1, 10: 2, 20: 4, 30: 6 };
 
 function NewsList() {
   const {
-    status,
+    isLoading,
     data,
     error,
     fetchNextPage,
@@ -31,8 +33,9 @@ function NewsList() {
       return { date, startTime, endTime, stories };
     },
     {
-      getNextPageParam: (lastStoriesByDate) => {
-        if (lastStoriesByDate) {
+      getNextPageParam: (lastStoriesByDate, allStoriesByDate) => {
+        // Restrict: not more than 100 days
+        if (lastStoriesByDate && allStoriesByDate?.length < 100) {
           const lastDate = lastStoriesByDate.date;
           const previousDate = moment(lastDate).subtract(1, "days");
           return {
@@ -57,9 +60,9 @@ function NewsList() {
     estimateSize: useCallback(() => 380 * FilterSet[top] + 70, [top]),
   });
 
-  useEffect(() => {
-    const [lastItem] = [...rowVirtualizer.virtualItems].reverse();
+  const [lastItem] = [...rowVirtualizer.virtualItems].reverse();
 
+  useEffect(() => {
     if (!lastItem) {
       return;
     }
@@ -72,6 +75,7 @@ function NewsList() {
       fetchNextPage();
     }
   }, [
+    lastItem,
     hasNextPage,
     fetchNextPage,
     storiesByDates.length,
@@ -97,12 +101,11 @@ function NewsList() {
           position: "relative",
         }}
       >
+        {isLoading && <Loading />}
         {rowVirtualizer.virtualItems.map((virtualRow) => {
-          const isLoaderRow = virtualRow.index > storiesByDates.length - 1;
           const { date, stories } = storiesByDates.length
             ? storiesByDates[virtualRow.index]
             : {};
-
           return (
             <div
               key={virtualRow.index}
@@ -116,23 +119,33 @@ function NewsList() {
               }}
             >
               <DateHeader date={date} />
-              {isLoaderRow
-                ? hasNextPage
-                  ? "brewing..."
-                  : "Wow, you've come a long way!"
-                : stories
-                    .slice(0, top)
-                    .map((story, index) => (
-                      <NewsItem
-                        rank={index + 1}
-                        {...story}
-                        key={story.id}
-                        displayDate={moment(date).format(StoreDateFormat)}
-                      />
-                    ))}
+              {stories.slice(0, top).map((story, index) => (
+                <NewsItem
+                  rank={index + 1}
+                  {...story}
+                  key={story.id}
+                  displayDate={moment(date).format(StoreDateFormat)}
+                />
+              ))}
             </div>
           );
         })}
+        {!storiesByDates.length || hasNextPage ? (
+          isFetchingNextPage && (
+            <Loading
+              style={{
+                position: "absolute",
+                width: "100%",
+                transform: `translateY(${lastItem.end}px)`,
+              }}
+            />
+          )
+        ) : (
+          <Divider
+            message="Wow, you've come a long way!"
+            style={{ fontSize: "0.9rem" }}
+          />
+        )}
       </div>
     </main>
   );

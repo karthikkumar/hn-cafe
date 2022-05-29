@@ -12,7 +12,7 @@ const Line = () => (
   />
 );
 
-const Divider = ({ name }) => (
+const Divider = ({ message, style }) => (
   <div
     css={{
       display: "flex",
@@ -20,19 +20,19 @@ const Divider = ({ name }) => (
       color: Color.yellow,
       fontFamily: Font.news,
       fontWeight: "100",
-      fontSize: "0.9rem",
+      fontSize: "0.7rem",
+      ...style,
     }}
   >
     <Line />
     <span
       css={{
-        fontSize: "0.7rem",
         textAlign: "center",
         whiteSpace: "nowrap",
         alignSelf: "center",
       }}
     >
-      {name}
+      {message}
     </span>
     <Line />
   </div>

@@ -202,7 +202,7 @@ function NewsItem({
         </div>
       </div>
       {!showedLastVisitedOnce && isLastVisited && (
-        <Divider name="LAST VISITED" />
+        <Divider message="LAST VISITED" />
       )}
     </>
   );
