@@ -151,17 +151,14 @@ const useIntersection = (element, rootMargin) => {
   return isVisible;
 };
 
-const useWindowFocus = ({ onFocus, onBlur }) => {
+const useDocumentEvent = ({ onMouseEnter }) => {
   useEffect(() => {
-    window.addEventListener("focus", onFocus);
-    window.addEventListener("blur", onBlur);
-
+    document.addEventListener("mouseenter", onMouseEnter);
     return () => {
-      window.removeEventListener("focus", onFocus);
-      window.removeEventListener("blur", onBlur);
+      document.removeEventListener("mouseenter", onMouseEnter);
     };
     // eslint-disable-next-line
   }, []);
 };
 
-export { useAsync, useLocalStorage, useIntersection, useWindowFocus };
+export { useAsync, useLocalStorage, useIntersection, useDocumentEvent };

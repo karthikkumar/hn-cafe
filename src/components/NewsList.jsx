@@ -7,6 +7,7 @@ import NewsItem from "./NewsItem";
 import DateHeader from "./DateHeader";
 import { getStories } from "../utils/api";
 import { useStateContext } from "../state";
+import { StoreDateFormat } from "../constants";
 
 const FilterSet = { 5: 1, 10: 2, 20: 4, 30: 6 };
 
@@ -126,7 +127,7 @@ function NewsList() {
                         rank={index + 1}
                         {...story}
                         key={story.id}
-                        displayDate={moment(date).format("DD-MM-YYYY")}
+                        displayDate={moment(date).format(StoreDateFormat)}
                       />
                     ))}
             </div>
