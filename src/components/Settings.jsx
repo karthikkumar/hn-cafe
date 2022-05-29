@@ -216,7 +216,7 @@ const Settings = ({ isOpen, onClose }) => {
                   <span
                     css={{
                       ":hover": {
-                        borderBottom: `2px solid ${Color.orange}`,
+                        borderBottom: `2px solid ${Color.lightBlue}`,
                       },
                     }}
                   >
@@ -237,7 +237,7 @@ const Settings = ({ isOpen, onClose }) => {
                   <span
                     css={{
                       ":hover": {
-                        borderBottom: `2px solid ${Color.orange}`,
+                        borderBottom: `2px solid ${Color.lightBlue}`,
                       },
                     }}
                   >
