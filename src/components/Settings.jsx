@@ -1,12 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { Color, Font } from "../utils/css-vars";
 import { useQueryClient } from "react-query";
+import { useStateContext } from "../state";
 
 // images
 import mug from "../img/mug@2x.png";
 
 const Settings = ({ isOpen, onClose }) => {
   const queryClient = useQueryClient();
+  const { setRefreshKey } = useStateContext();
 
   if (!isOpen) {
     return null;
@@ -208,9 +210,18 @@ const Settings = ({ isOpen, onClose }) => {
                   }}
                   onClick={() => {
                     queryClient.clear();
+                    setRefreshKey((key) => key + 1);
                   }}
                 >
-                  Clear
+                  <span
+                    css={{
+                      ":hover": {
+                        borderBottom: `2px solid ${Color.orange}`,
+                      },
+                    }}
+                  >
+                    Clear
+                  </span>
                 </div>
                 <div>Preferences</div>
                 <div
@@ -220,9 +231,18 @@ const Settings = ({ isOpen, onClose }) => {
                   }}
                   onClick={() => {
                     localStorage.clear();
+                    setRefreshKey((key) => key + 1);
                   }}
                 >
-                  Reset
+                  <span
+                    css={{
+                      ":hover": {
+                        borderBottom: `2px solid ${Color.orange}`,
+                      },
+                    }}
+                  >
+                    Reset
+                  </span>
                 </div>
               </div>
             </div>

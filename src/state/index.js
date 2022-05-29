@@ -6,6 +6,7 @@ function StateContextProvider(props) {
   const [top, setTop] = useState("5");
   const [showedLastVisitedOnce, setShowedLastVisitedOnce] = useState(false);
   const [stickyHeader, setStickyHeader] = useState("");
+  const [refreshKey, setRefreshKey] = useState(0);
   return (
     <StateContext.Provider
       value={{
@@ -15,6 +16,8 @@ function StateContextProvider(props) {
         setShowedLastVisitedOnce,
         stickyHeader,
         setStickyHeader,
+        refreshKey,
+        setRefreshKey,
       }}
       {...props}
     />

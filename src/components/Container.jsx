@@ -9,7 +9,7 @@ import { useStateContext } from "../state";
 import { StoreDateFormat } from "../constants";
 
 function Container() {
-  const { setShowedLastVisitedOnce } = useStateContext();
+  const { setShowedLastVisitedOnce, refreshKey } = useStateContext();
   useDocumentEvent({
     onMouseEnter: () => {
       // swap current session's last visited data as last session data
@@ -75,7 +75,7 @@ function Container() {
         }}
       >
         <LeftSidebar />
-        <NewsList />
+        <NewsList key={refreshKey} />
       </div>
     </div>
   );
