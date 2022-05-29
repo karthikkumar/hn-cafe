@@ -2,7 +2,10 @@
 
 import { Color, Font } from "../utils/css-vars";
 
-const Error = () => {
+// images
+import quakers from "../img/quakers@2x.png";
+
+const Error = ({ style }) => {
   return (
     <div
       css={{
@@ -12,15 +15,20 @@ const Error = () => {
         bottom: 0,
         left: 0,
         display: "flex",
-        justifyContent: "flex-start",
-        alignItems: "top",
+        flexDirection: "column",
+        gap: "0.5rem",
+        justifyContent: "center",
+        alignItems: "center",
         fontFamily: Font.news,
         fontSize: "1rem",
         color: Color.yellow,
         margin: "0 2rem",
+        height: "90vh",
+        ...style,
       }}
     >
-      <p>WHOOPS, quakers!</p>
+      <img src={quakers} alt="whoops, quakers!" width={48} />
+      <p>Whoops, quakers!</p>
     </div>
   );
 };

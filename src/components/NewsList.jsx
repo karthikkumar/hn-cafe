@@ -10,14 +10,15 @@ import { useStateContext } from "../state";
 import { StoreDateFormat } from "../constants";
 import Loading from "./Loading";
 import Divider from "./Divider";
+import Error from "./Error";
 
 const FilterSet = { 5: 1, 10: 2, 20: 4, 30: 6 };
 
 function NewsList() {
   const {
     isLoading,
+    isError,
     data,
-    error,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
@@ -101,7 +102,8 @@ function NewsList() {
           position: "relative",
         }}
       >
-        {isLoading && <Loading />}
+        {!storiesByDates.length && isLoading && <Loading />}
+        {!storiesByDates.length && isError && <Error />}
         {rowVirtualizer.virtualItems.map((virtualRow) => {
           const { date, stories } = storiesByDates.length
             ? storiesByDates[virtualRow.index]
@@ -131,7 +133,17 @@ function NewsList() {
           );
         })}
         {!storiesByDates.length || hasNextPage ? (
-          isFetchingNextPage && (
+          isFetchingNextPage && isError ? (
+            <Divider
+              message="Brewer has stopped pumping!"
+              style={{
+                fontSize: "0.9rem",
+                position: "absolute",
+                width: "100%",
+                transform: `translateY(${lastItem.end}px)`,
+              }}
+            />
+          ) : (
             <Loading
               style={{
                 position: "absolute",
@@ -143,7 +155,12 @@ function NewsList() {
         ) : (
           <Divider
             message="Wow, you've come a long way!"
-            style={{ fontSize: "0.9rem" }}
+            style={{
+              fontSize: "0.9rem",
+              position: "absolute",
+              width: "100%",
+              transform: `translateY(${lastItem.end}px)`,
+            }}
           />
         )}
       </div>
