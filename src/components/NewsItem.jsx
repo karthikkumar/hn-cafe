@@ -55,6 +55,9 @@ function NewsItem({
     window.open(itemURL);
   };
 
+  const readList = getLocalStorage(LocalStorageKey.ReadList);
+  const isRead = readList?.includes(id);
+
   return (
     <>
       <div
@@ -75,7 +78,7 @@ function NewsItem({
       >
         <div
           css={{
-            color: Color.white,
+            color: isRead ? Color.gray : Color.white,
             fontSize: "1rem",
             fontFamily: Font.news,
             fontWeight: "bold",
@@ -107,10 +110,15 @@ function NewsItem({
             {...openLinkProps}
             css={{
               textDecoration: "none",
-              color: Color.white,
+              color: isRead ? Color.gray : Color.white,
               fontFamily: Font.news,
               fontWeight: 500,
               cursor: "pointer",
+            }}
+            onClick={() => {
+              setLocalStorage(LocalStorageKey.ReadList, (list = []) =>
+                Array.from(new Set([...list]).add(id))
+              );
             }}
           >
             {title}

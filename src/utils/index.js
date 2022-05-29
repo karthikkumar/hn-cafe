@@ -1,6 +1,7 @@
 const LocalStorageKey = {
   LastSessionLastVisited: "last_session_last_visited",
   CurrentSessionLastVisited: "current_session_last_visited",
+  ReadList: "read-list",
 };
 
 const getLocalStorage = (key) => {
