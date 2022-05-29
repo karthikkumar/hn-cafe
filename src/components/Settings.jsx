@@ -1,13 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import { Color, Font } from "../utils/css-vars";
+import { useQueryClient } from "react-query";
 
 // images
 import mug from "../img/mug@2x.png";
 
 const Settings = ({ isOpen, onClose }) => {
+  const queryClient = useQueryClient();
+
   if (!isOpen) {
     return null;
   }
+
   return (
     <div css={{ position: "fixed", zIndex: 50 }}>
       <div
@@ -174,6 +178,10 @@ const Settings = ({ isOpen, onClose }) => {
                   css={{
                     color: Color.lightBlue,
                     cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    localStorage.clear();
+                    queryClient.clear();
                   }}
                 >
                   Clear
