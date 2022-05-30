@@ -46,7 +46,7 @@ const Settings = ({ isOpen, onClose }) => {
           style={{
             backgroundColor: Color.darkBlue,
             width: "960px",
-            height: "400px",
+            height: "420px",
             borderRadius: "10px",
             padding: "2rem 3rem",
           }}
@@ -80,7 +80,7 @@ const Settings = ({ isOpen, onClose }) => {
                       color: Color.yellow,
                     }}
                   >
-                    KOFFEE <br />
+                    COFFEE <br />
                     NEWS
                   </h1>
                 </div>
@@ -93,7 +93,7 @@ const Settings = ({ isOpen, onClose }) => {
                   }}
                 >
                   <small css={{ color: Color.white, fontSize: "0.8rem" }}>
-                    brewed by
+                    coffee beans from,
                   </small>
                   <br />
                   <a
@@ -126,10 +126,10 @@ const Settings = ({ isOpen, onClose }) => {
                   paddingRight: "1rem",
                 }}
               >
-                Why Koffee News? because, Y Combinator's Hacker News doesn't
+                Why Coffee News? because, Y Combinator's Hacker News doesn't
                 have an option to read only the top news (by score) for a given
-                date. Koffee News is for those who want to spend a finite amount
-                of time on catching up tech news.
+                date. Coffee News is for those who want to spend a finite amount
+                of time (Coffee Time) to catch up with the daily tech news.
               </p>
               <div
                 css={{
@@ -170,7 +170,7 @@ const Settings = ({ isOpen, onClose }) => {
               }}
             >
               <div css={{ fontFamily: Font.logo, fontWeight: "600" }}>
-                SETTINGS
+                Settings
               </div>
               <div
                 css={{
@@ -223,6 +223,7 @@ const Settings = ({ isOpen, onClose }) => {
                 >
                   <span
                     css={{
+                      fontWeight: "bold",
                       padding: "0.25rem 0.75rem",
                       borderRadius: "1rem",
                       ":hover": {
@@ -246,6 +247,7 @@ const Settings = ({ isOpen, onClose }) => {
                 >
                   <span
                     css={{
+                      fontWeight: "bold",
                       padding: "0.25rem 0.75rem",
                       borderRadius: "1rem",
                       ":hover": {
