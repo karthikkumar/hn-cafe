@@ -46,7 +46,7 @@ const Settings = ({ isOpen, onClose }) => {
           style={{
             backgroundColor: Color.darkBlue,
             width: "960px",
-            height: "420px",
+            height: "460px",
             borderRadius: "10px",
             padding: "2rem 3rem",
           }}
@@ -118,7 +118,7 @@ const Settings = ({ isOpen, onClose }) => {
                   </a>
                 </div>
               </div>
-              <p
+              <div
                 css={{
                   color: Color.white,
                   fontFamily: Font.news,
@@ -126,11 +126,17 @@ const Settings = ({ isOpen, onClose }) => {
                   paddingRight: "1rem",
                 }}
               >
-                Why Coffee News? because, Y Combinator's Hacker News doesn't
-                have an option to read only the top news (by score) for a given
-                date. Coffee News is for those who want to spend a finite amount
-                of time (Coffee Time) to catch up with the daily tech news.
-              </p>
+                <p css={{ paddingBottom: "0.5rem" }}>
+                  Why Coffee News? because, Y Combinator's Hacker News doesn't
+                  have an option to read only the top news (by score) for a
+                  given date. To an analogy, Coffee News is just a brewer,
+                  roasted coffee beans are coming from Hacker News.
+                </p>
+                <p>
+                  Coffee News is for those who want to spend a finite amount of
+                  time (Coffee Time) to catch up with the daily tech news.
+                </p>
+              </div>
               <div
                 css={{
                   margin: "1rem 0",
