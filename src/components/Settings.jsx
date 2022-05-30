@@ -152,9 +152,9 @@ const Settings = ({ isOpen, onClose }) => {
                     fontSize: "1rem",
                     color: Color.lightBlue,
                     cursor: "pointer",
-                    borderBottom: `2px solid ${Color.transparent}`,
+                    borderBottom: `1px solid ${Color.transparent}`,
                     ":hover": {
-                      borderBottom: `2px solid ${Color.lightBlue}`,
+                      borderBottom: `1px solid ${Color.lightBlue}`,
                     },
                   }}
                 >

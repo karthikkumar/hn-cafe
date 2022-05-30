@@ -148,9 +148,9 @@ function NewsItem({
                       textDecoration: "none",
                       color: Color.lightBlue,
                       width: "max-content",
-                      borderBottom: `2px solid ${Color.transparent}`,
+                      borderBottom: `1px solid ${Color.transparent}`,
                       ":hover": {
-                        borderBottom: `2px solid ${Color.lightBlue}`,
+                        borderBottom: `1px solid ${Color.lightBlue}`,
                       },
                     }}
                   >
@@ -168,9 +168,9 @@ function NewsItem({
                       textDecoration: "none",
                       color: Color.lightBlue,
                       width: "max-content",
-                      borderBottom: `2px solid ${Color.transparent}`,
+                      borderBottom: `1px solid ${Color.transparent}`,
                       ":hover": {
-                        borderBottom: `2px solid ${Color.lightBlue}`,
+                        borderBottom: `1px solid ${Color.lightBlue}`,
                       },
                     }}
                   >
@@ -190,17 +190,17 @@ function NewsItem({
                 cursor: "pointer",
                 width: "max-content",
                 "#time, #points, #comments, #y": {
-                  borderBottom: `2px solid ${Color.transparent}`,
+                  borderBottom: `1px solid ${Color.transparent}`,
                 },
                 ":hover": {
                   "#time": {
-                    borderBottom: `2px solid ${Color.yellow}`,
+                    borderBottom: `1px solid ${Color.yellow}`,
                   },
                   "#points": {
-                    borderBottom: `2px solid ${Color.pointsColor}`,
+                    borderBottom: `1px solid ${Color.pointsColor}`,
                   },
                   "#comments": {
-                    borderBottom: `2px solid ${Color.commentsColor}`,
+                    borderBottom: `1px solid ${Color.commentsColor}`,
                   },
                 },
               }}
