@@ -15,6 +15,9 @@ const Option = ({ checked, valueLabel }) => (
       margin: "0.3rem 0",
       borderBottom: `3px solid ${checked ? Color.orange : Color.transparent}`,
       cursor: "pointer",
+      ":hover": {
+        borderBottom: `3px solid ${Color.orange}`,
+      },
     }}
   >
     {checked && <span css={{ position: "absolute", left: "-40px" }}>HOT</span>}

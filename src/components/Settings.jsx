@@ -107,6 +107,10 @@ const Settings = ({ isOpen, onClose }) => {
                         color: Color.lightBlue,
                         fontWeight: 600,
                         fontSize: "1rem",
+                        borderBottom: `2px solid ${Color.transparent}`,
+                        ":hover": {
+                          borderBottom: `2px solid ${Color.lightBlue}`,
+                        },
                       }}
                     >
                       HACKER NEWS
@@ -142,6 +146,10 @@ const Settings = ({ isOpen, onClose }) => {
                     fontSize: "1rem",
                     color: Color.lightBlue,
                     cursor: "pointer",
+                    borderBottom: `2px solid ${Color.transparent}`,
+                    ":hover": {
+                      borderBottom: `2px solid ${Color.lightBlue}`,
+                    },
                   }}
                 >
                   Feedback
@@ -215,8 +223,10 @@ const Settings = ({ isOpen, onClose }) => {
                 >
                   <span
                     css={{
+                      padding: "0.25rem 0.75rem",
+                      borderRadius: "1rem",
                       ":hover": {
-                        borderBottom: `2px solid ${Color.lightBlue}`,
+                        backgroundColor: Color.dimBlue,
                       },
                     }}
                   >
@@ -236,8 +246,10 @@ const Settings = ({ isOpen, onClose }) => {
                 >
                   <span
                     css={{
+                      padding: "0.25rem 0.75rem",
+                      borderRadius: "1rem",
                       ":hover": {
-                        borderBottom: `2px solid ${Color.lightBlue}`,
+                        backgroundColor: Color.dimBlue,
                       },
                     }}
                   >

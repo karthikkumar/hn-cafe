@@ -115,6 +115,11 @@ function NewsItem({
               fontFamily: Font.news,
               fontWeight: 500,
               cursor: "pointer",
+              width: "max-content",
+              borderBottom: `2px solid ${Color.transparent}`,
+              ":hover": {
+                borderBottom: `2px solid ${Color.white}`,
+              },
             }}
             onClick={() => {
               setLocalStorage(LocalStorageKey.ReadList, (list = []) =>
@@ -139,7 +144,15 @@ function NewsItem({
                   <a
                     href={origin}
                     {...openLinkProps}
-                    css={{ textDecoration: "none", color: Color.lightBlue }}
+                    css={{
+                      textDecoration: "none",
+                      color: Color.lightBlue,
+                      width: "max-content",
+                      borderBottom: `2px solid ${Color.transparent}`,
+                      ":hover": {
+                        borderBottom: `2px solid ${Color.lightBlue}`,
+                      },
+                    }}
                   >
                     {hostname}
                   </a>
@@ -151,7 +164,15 @@ function NewsItem({
                   <a
                     href={`https://news.ycombinator.com/user?id=${by}`}
                     {...openLinkProps}
-                    css={{ textDecoration: "none", color: Color.lightBlue }}
+                    css={{
+                      textDecoration: "none",
+                      color: Color.lightBlue,
+                      width: "max-content",
+                      borderBottom: `2px solid ${Color.transparent}`,
+                      ":hover": {
+                        borderBottom: `2px solid ${Color.lightBlue}`,
+                      },
+                    }}
                   >
                     {by}
                   </a>
@@ -167,6 +188,21 @@ function NewsItem({
                 alignItems: "flex-end",
                 gap: "1rem",
                 cursor: "pointer",
+                width: "max-content",
+                "#time, #points, #comments, #y": {
+                  borderBottom: `2px solid ${Color.transparent}`,
+                },
+                ":hover": {
+                  "#time": {
+                    borderBottom: `2px solid ${Color.yellow}`,
+                  },
+                  "#points": {
+                    borderBottom: `2px solid ${Color.pointsColor}`,
+                  },
+                  "#comments": {
+                    borderBottom: `2px solid ${Color.commentsColor}`,
+                  },
+                },
               }}
               onClick={(e) => {
                 e.preventDefault();
@@ -174,13 +210,13 @@ function NewsItem({
                 handleItemClick();
               }}
             >
-              <small css={{ color: Color.yellow }}>
+              <small id="time" css={{ color: Color.yellow }}>
                 <p>{moment.unix(time).fromNow()}</p>
               </small>
-              <small css={{ color: Color.pointsColor }}>
+              <small id="points" css={{ color: Color.pointsColor }}>
                 <p>{score} points</p>
               </small>
-              <small css={{ color: Color.commentsColor }}>
+              <small id="comments" css={{ color: Color.commentsColor }}>
                 <p>{descendants} comments</p>
               </small>
               <a
@@ -189,6 +225,7 @@ function NewsItem({
                 css={{ textDecoration: "none", height: "15px" }}
               >
                 <img
+                  id="y"
                   src={y}
                   alt="y combinator"
                   css={{
