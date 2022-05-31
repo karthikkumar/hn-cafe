@@ -3,7 +3,7 @@
 import { Color, Font } from "../utils/css-vars";
 
 // images
-import quakers from "../img/quakers@2x.png";
+import quakers from "../img/quakers.png";
 
 const Error = ({ style }) => {
   return (

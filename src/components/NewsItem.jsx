@@ -8,7 +8,7 @@ import { LocalStorageKey, getLocalStorage, setLocalStorage } from "../utils";
 import { useStateContext } from "../state";
 
 // images
-import y from "../img/Y.png";
+import y from "../img/y.png";
 
 const openLinkProps = { target: "_blank", rel: "noreferrer noopener" };
 

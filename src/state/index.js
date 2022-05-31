@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 const StateContext = createContext();
 
 function StateContextProvider(props) {
-  const [top, setTop] = useState("5");
+  const [top, setTop] = useState("10");
   const [showedLastVisitedOnce, setShowedLastVisitedOnce] = useState(false);
   const [stickyHeader, setStickyHeader] = useState("");
   const [refreshKey, setRefreshKey] = useState(0);

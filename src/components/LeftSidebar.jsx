@@ -5,7 +5,7 @@ import { Color } from "../utils/css-vars";
 import Settings from "./Settings";
 
 // images
-import mug from "../img/mug@2x.png";
+import mug from "../img/mug.png";
 
 function LeftSidebar() {
   const [isSettingsOpen, setIsSettingsopen] = useState(false);

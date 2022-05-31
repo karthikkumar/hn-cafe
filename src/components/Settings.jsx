@@ -4,7 +4,7 @@ import { useQueryClient } from "react-query";
 import { useStateContext } from "../state";
 
 // images
-import mug from "../img/mug@2x.png";
+import mug from "../img/mug.png";
 
 const Settings = ({ isOpen, onClose }) => {
   const queryClient = useQueryClient();
@@ -46,7 +46,7 @@ const Settings = ({ isOpen, onClose }) => {
           style={{
             backgroundColor: Color.darkBlue,
             width: "960px",
-            height: "460px",
+            height: "385px",
             borderRadius: "10px",
             padding: "2rem 3rem",
           }}
@@ -56,35 +56,37 @@ const Settings = ({ isOpen, onClose }) => {
             css={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              gridTemplateRows: "6fr 1fr",
+              gridTemplateRows: "4fr 1fr",
             }}
           >
             <div>
               <div>
-                <div>
-                  <img src={mug} alt="coffee mug icon" width={36} />
-                  <div
-                    css={{
-                      height: "5px",
-                      width: "36px",
-                      backgroundColor: Color.orange,
-                      marginBottom: "2px",
-                    }}
-                  ></div>
+                <div css={{ display: "flex", gap: "1rem" }}>
                   <h1
                     css={{
                       lineHeight: "1.8rem",
-                      fontSize: "2rem",
+                      fontSize: "1.8rem",
                       fontFamily: Font.logo,
                       fontWeight: "bold",
                       color: Color.yellow,
+                      paddingTop: "2px",
                     }}
                   >
                     COFFEE <br />
                     NEWS
                   </h1>
+                  <div>
+                    <img src={mug} alt="coffee mug icon" width={36} />
+                    <div
+                      css={{
+                        height: "3px",
+                        width: "36px",
+                        backgroundColor: Color.orange,
+                      }}
+                    ></div>
+                  </div>
                 </div>
-                <div
+                {/* <div
                   css={{
                     fontFamily: Font.logo,
                     lineHeight: "1rem",
@@ -116,7 +118,7 @@ const Settings = ({ isOpen, onClose }) => {
                       HACKER NEWS
                     </strong>
                   </a>
-                </div>
+                </div> */}
               </div>
               <div
                 css={{
@@ -124,17 +126,20 @@ const Settings = ({ isOpen, onClose }) => {
                   fontFamily: Font.news,
                   fontSize: "0.9rem",
                   paddingRight: "1rem",
+                  marginTop: "1.5rem",
+                  marginBottom: "2rem",
                 }}
               >
                 <p css={{ paddingBottom: "0.5rem" }}>
                   Why Coffee News? because, Y Combinator's Hacker News doesn't
-                  have an option to read only the top news (by score) for a
-                  given date. To an analogy, Coffee News is just a brewer,
-                  roasted coffee beans are coming from Hacker News.
+                  have an option to read only the top news (by score, not by
+                  rank) for a given date. Coffee News is just an aggregator,
+                  source of feed is Hacker News.
                 </p>
                 <p>
-                  Coffee News is for those who want to spend a finite amount of
-                  time (Coffee Time) to catch up with the daily tech news.
+                  Coffee News is for those who want to spend a good and finite
+                  amount of time (like coffee time) to catch up with the daily
+                  tech news.
                 </p>
               </div>
               <div
@@ -149,6 +154,7 @@ const Settings = ({ isOpen, onClose }) => {
                   css={{
                     textDecoration: "none",
                     fontFamily: Font.news,
+                    fontWeight: "bold",
                     fontSize: "1rem",
                     color: Color.lightBlue,
                     cursor: "pointer",
@@ -219,7 +225,7 @@ const Settings = ({ isOpen, onClose }) => {
                 <div>Cache</div>
                 <div
                   css={{
-                    color: Color.lightBlue,
+                    color: Color.yellow,
                     cursor: "pointer",
                   }}
                   onClick={() => {
@@ -229,21 +235,21 @@ const Settings = ({ isOpen, onClose }) => {
                 >
                   <span
                     css={{
-                      fontWeight: "bold",
-                      padding: "0.25rem 0.75rem",
-                      borderRadius: "1rem",
+                      fontFamily: Font.logo,
+                      fontSize: "1rem",
+                      borderBottom: `2px solid ${Color.transparent}`,
                       ":hover": {
-                        backgroundColor: Color.dimBlue,
+                        borderBottom: `2px solid ${Color.orange}`,
                       },
                     }}
                   >
-                    Clear
+                    CLEAR
                   </span>
                 </div>
                 <div>Preferences</div>
                 <div
                   css={{
-                    color: Color.lightBlue,
+                    color: Color.yellow,
                     cursor: "pointer",
                   }}
                   onClick={() => {
@@ -253,15 +259,15 @@ const Settings = ({ isOpen, onClose }) => {
                 >
                   <span
                     css={{
-                      fontWeight: "bold",
-                      padding: "0.25rem 0.75rem",
-                      borderRadius: "1rem",
+                      fontFamily: Font.logo,
+                      fontSize: "1rem",
+                      borderBottom: `2px solid ${Color.transparent}`,
                       ":hover": {
-                        backgroundColor: Color.dimBlue,
+                        borderBottom: `2px solid ${Color.orange}`,
                       },
                     }}
                   >
-                    Reset
+                    RESET
                   </span>
                 </div>
               </div>
