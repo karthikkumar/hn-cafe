@@ -8,7 +8,7 @@ import { LocalStorageKey, getLocalStorage, setLocalStorage } from "../utils";
 import { useStateContext } from "../state";
 
 // images
-import y from "../img/y.png";
+import Y from "../img/Y.png";
 
 const openLinkProps = { target: "_blank", rel: "noreferrer noopener" };
 
@@ -226,7 +226,7 @@ function NewsItem({
               >
                 <img
                   id="y"
-                  src={y}
+                  src={Y}
                   alt="y combinator"
                   css={{
                     width: "15px",
