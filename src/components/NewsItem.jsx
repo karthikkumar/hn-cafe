@@ -85,6 +85,8 @@ function NewsItem({
             fontWeight: "bold",
             position: "relative",
             marginRight: "0.5rem",
+            width: "1rem",
+            textAlign: "right",
             "::after": {
               content: `""`,
               position: "absolute",
@@ -101,7 +103,7 @@ function NewsItem({
           css={{
             display: "flex",
             flexDirection: "column",
-            gap: "1rem",
+            gap: "0.2rem",
             padding: "0 1rem",
             width: "100%",
           }}
@@ -116,9 +118,9 @@ function NewsItem({
               fontWeight: 500,
               cursor: "pointer",
               width: "max-content",
-              borderBottom: `2px solid ${Color.transparent}`,
+              borderBottom: `1.5px solid ${Color.transparent}`,
               ":hover": {
-                borderBottom: `2px solid ${Color.white}`,
+                borderBottom: `1.5px solid ${Color.white}`,
               },
             }}
             onClick={() => {
@@ -139,25 +141,23 @@ function NewsItem({
             }}
           >
             <div css={{ display: "flex", alignItems: "flex-end" }}>
-              {url && (
-                <small css={{ color: Color.lightBlue, marginRight: "1rem" }}>
-                  <a
-                    href={origin}
-                    {...openLinkProps}
-                    css={{
-                      textDecoration: "none",
-                      color: Color.lightBlue,
-                      width: "max-content",
-                      borderBottom: `1px solid ${Color.transparent}`,
-                      ":hover": {
-                        borderBottom: `1px solid ${Color.lightBlue}`,
-                      },
-                    }}
-                  >
-                    {hostname}
-                  </a>
-                </small>
-              )}
+              <small css={{ color: Color.lightBlue, marginRight: "1rem" }}>
+                <a
+                  href={origin || itemURL}
+                  {...openLinkProps}
+                  css={{
+                    textDecoration: "none",
+                    color: Color.lightBlue,
+                    width: "max-content",
+                    borderBottom: `1px solid ${Color.transparent}`,
+                    ":hover": {
+                      borderBottom: `1px solid ${Color.lightBlue}`,
+                    },
+                  }}
+                >
+                  {hostname || "news.ycombinator.com"}
+                </a>
+              </small>
               <small id="hidden" css={{ visibility: "hidden" }}>
                 <p>
                   {`by `}

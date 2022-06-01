@@ -60,7 +60,7 @@ function NewsList() {
   const rowVirtualizer = useVirtual({
     size: storiesByDates.length,
     parentRef,
-    estimateSize: useCallback(() => 400 * FilterSet[top] + 70, [top]),
+    estimateSize: useCallback(() => 330 * FilterSet[top] + 70, [top]),
   });
 
   const [lastItem] = [...rowVirtualizer.virtualItems].reverse();
