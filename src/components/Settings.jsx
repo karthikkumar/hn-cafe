@@ -115,13 +115,13 @@ const Settings = ({ isOpen, onClose }) => {
                 }}
               >
                 <p css={{ paddingBottom: "0.5rem" }}>
-                  Why Coffee News? because, Y Combinator's Hacker News doesn't
-                  have an option to read only the top news (by score, not by
-                  rank) for a given date. Coffee News is just an aggregator,
+                  Why HackerNews.Cafe? because, Y Combinator's Hacker News
+                  doesn't have an option to read only the top news (by score,
+                  not by rank) for a given date. HN Cafe is just an aggregator,
                   source of feed is Hacker News.
                 </p>
                 <p>
-                  Coffee News is for those who want to spend a good and finite
+                  HN Cafe is for those who want to spend a good and finite
                   amount of time (like coffee time) to catch up with the daily
                   tech news.
                 </p>
