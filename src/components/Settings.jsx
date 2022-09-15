@@ -148,7 +148,7 @@ const Settings = ({ isOpen, onClose }) => {
                 }}
               >
                 <a
-                  href="https://github.com/karthikkumar/koffee-news/issues/new"
+                  href="https://github.com/karthikkumar/hn-cafe/issues/new"
                   target="_blank"
                   rel="noreferrer noopener"
                   css={{
