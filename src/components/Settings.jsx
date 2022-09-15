@@ -4,7 +4,7 @@ import { useQueryClient } from "react-query";
 import { useStateContext } from "../state";
 
 // images
-import mug from "../img/mug.png";
+import logo from "../img/hn-cafe-logo.png";
 
 const Settings = ({ isOpen, onClose }) => {
   const queryClient = useQueryClient();
@@ -46,7 +46,6 @@ const Settings = ({ isOpen, onClose }) => {
           style={{
             backgroundColor: Color.darkBlue,
             width: "960px",
-            height: "385px",
             borderRadius: "10px",
             padding: "2rem 3rem",
           }}
@@ -56,34 +55,19 @@ const Settings = ({ isOpen, onClose }) => {
             css={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              gridTemplateRows: "4fr 1fr",
+              gridTemplateRows: "4fr 0.5fr",
             }}
           >
             <div>
               <div>
                 <div css={{ display: "flex", gap: "1rem" }}>
-                  <h1
-                    css={{
-                      lineHeight: "1.8rem",
-                      fontSize: "1.8rem",
-                      fontFamily: Font.logo,
-                      fontWeight: "bold",
-                      color: Color.yellow,
-                      paddingTop: "2px",
-                    }}
-                  >
-                    COFFEE <br />
-                    NEWS
-                  </h1>
                   <div>
-                    <img src={mug} alt="coffee mug icon" width={36} />
-                    <div
-                      css={{
-                        height: "3px",
-                        width: "36px",
-                        backgroundColor: Color.orange,
-                      }}
-                    ></div>
+                    <img
+                      src={logo}
+                      alt="hn-cafe logo"
+                      width={118}
+                      height={82}
+                    />
                   </div>
                 </div>
                 {/* <div
@@ -274,8 +258,8 @@ const Settings = ({ isOpen, onClose }) => {
             </div>
             <div
               css={{
-                height: "3rem",
                 display: "flex",
+                alignItems: "flex-end",
                 flexDirection: "row-reverse",
                 gridColumn: " 1 / span 2",
               }}
