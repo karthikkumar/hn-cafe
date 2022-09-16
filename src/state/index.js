@@ -4,7 +4,6 @@ const StateContext = createContext();
 
 function StateContextProvider(props) {
   const [top, setTop] = useState("10");
-  const [showedLastVisitedOnce, setShowedLastVisitedOnce] = useState(false);
   const [stickyHeader, setStickyHeader] = useState("");
   const [refreshKey, setRefreshKey] = useState(0);
   return (
@@ -12,8 +11,6 @@ function StateContextProvider(props) {
       value={{
         top,
         setTop,
-        showedLastVisitedOnce,
-        setShowedLastVisitedOnce,
         stickyHeader,
         setStickyHeader,
         refreshKey,

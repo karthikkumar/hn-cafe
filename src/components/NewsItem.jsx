@@ -1,57 +1,17 @@
 /** @jsxImportSource @emotion/react */
-import { useEffect, useRef, useState } from "react";
 import moment from "moment";
 import { Color, Font } from "../utils/css-vars";
-import { useIntersection } from "../utils/hooks";
-import Divider from "./Divider";
 import { LocalStorageKey, getLocalStorage, setLocalStorage } from "../utils";
-import { useStateContext } from "../state";
 
 // images
 import Y from "../img/Y.png";
 
 const openLinkProps = { target: "_blank", rel: "noreferrer noopener" };
 
-function NewsItem({
-  id,
-  rank,
-  title,
-  url,
-  by,
-  score,
-  time,
-  descendants,
-  displayDate,
-}) {
-  const ref = useRef();
-  const inViewport = useIntersection(ref, "-70px");
-  const [isVisited, setIsVisited] = useState(false);
-  const { showedLastVisitedOnce, setShowedLastVisitedOnce } = useStateContext();
-  const lastVisited = getLocalStorage(LocalStorageKey.LastSessionLastVisited);
-  const isLastVisited = id === lastVisited?.id && rank === lastVisited?.rank;
-
-  useEffect(() => {
-    let timer;
-    if (inViewport && isLastVisited) {
-      timer = setTimeout(() => setShowedLastVisitedOnce(true), 5000);
-    }
-    return () => clearTimeout(timer);
-    // eslint-disable-next-line
-  }, [inViewport, isLastVisited]);
-
-  if (inViewport && !isVisited) {
-    setLocalStorage(LocalStorageKey.CurrentSessionLastVisited, {
-      id,
-      rank,
-      time,
-      displayDate,
-    });
-    setIsVisited(true);
-  }
-
+function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
   const { origin, hostname } = url ? new URL(url) : {};
-
   const itemURL = `https://news.ycombinator.com/item?id=${id}`;
+
   const handleItemClick = () => {
     window.open(itemURL);
   };
@@ -62,7 +22,6 @@ function NewsItem({
   return (
     <>
       <div
-        ref={ref}
         css={{
           display: "flex",
           justifyContent: "flex-start",
@@ -239,9 +198,6 @@ function NewsItem({
           </div>
         </div>
       </div>
-      {!showedLastVisitedOnce && isLastVisited && (
-        <Divider message="LAST VISITED" />
-      )}
     </>
   );
 }
