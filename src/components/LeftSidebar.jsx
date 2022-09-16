@@ -18,6 +18,10 @@ function LeftSidebar() {
       />
       <aside
         css={{
+          position: "sticky",
+          top: 0,
+          left: 0,
+          width: "calc(100vw/4)",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",

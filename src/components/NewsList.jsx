@@ -13,6 +13,7 @@ import Divider from "./Divider";
 import Error from "./Error";
 import { Color } from "../utils/css-vars";
 import StickyHeader from "./StickyHeader";
+import LeftSidebar from "./LeftSidebar";
 
 const FilterSet = { 5: 1, 10: 2, 20: 4, 30: 6 };
 
@@ -54,8 +55,8 @@ function NewsList() {
   const storiesByDates = data?.pages ?? [];
 
   const parentRef = useRef();
-  const state = useStateContext();
-  const top = parseInt(state.top);
+  const { top: topFilter, stickyHeader, refreshKey } = useStateContext();
+  const top = parseInt(topFilter);
 
   const rowVirtualizer = useVirtual({
     size: storiesByDates.length,
@@ -90,25 +91,29 @@ function NewsList() {
     <main
       ref={parentRef}
       css={{
-        marginLeft: "1.5rem",
-        height: "calc(100vh - 1rem)",
+        height: "100%",
         overflowY: "auto",
         overflowX: "hidden",
-        borderTop: `1rem solid ${Color.darkBlue}`,
-        borderBottom: `0.5rem solid ${Color.darkBlue}`,
+        display: "flex",
+        justifyContent: "center",
+        border: `1rem solid ${Color.darkBlue}`,
+        borderBottom: `1rem solid ${Color.darkBlue}`,
       }}
     >
+      <LeftSidebar />
       <div
         css={{
           height: `${rowVirtualizer.totalSize}px`,
-          width: "100%",
-          maxWidth: "800px",
+          width: "800px",
+          marginLeft: "50px",
+          marginRight: "auto",
           position: "relative",
         }}
+        key={refreshKey}
       >
         {!storiesByDates.length && isLoading && <Loading />}
         {!storiesByDates.length && isError && <Error />}
-        {state.stickyHeader && <StickyHeader title={state.stickyHeader} />}
+        {stickyHeader && <StickyHeader title={stickyHeader} />}
         {rowVirtualizer.virtualItems.map((virtualRow) => {
           const { date, stories } = storiesByDates.length
             ? storiesByDates[virtualRow.index]

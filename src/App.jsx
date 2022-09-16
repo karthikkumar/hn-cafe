@@ -1,11 +1,11 @@
-import { StateContextProvider } from "./state";
+import Providers from "./Providers";
 import Container from "./components/Container";
 
 function App() {
   return (
-    <StateContextProvider>
+    <Providers>
       <Container />
-    </StateContextProvider>
+    </Providers>
   );
 }
 

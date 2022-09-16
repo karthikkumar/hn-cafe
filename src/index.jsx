@@ -1,19 +1,12 @@
 import { render } from "react-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import App from "./App";
 
 // styles
 import "./styles.scss";
 
-const queryClient = new QueryClient();
 const root = document.getElementById("root");
-render(
-  <QueryClientProvider client={queryClient}>
-    <App />
-  </QueryClientProvider>,
-  root
-);
+render(<App />, root);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
