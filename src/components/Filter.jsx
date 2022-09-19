@@ -20,7 +20,19 @@ const Option = ({ checked, valueLabel }) => (
       },
     }}
   >
-    {checked && <span css={{ position: "absolute", left: "-40px" }}>HOT</span>}
+    {checked && (
+      <span
+        css={{
+          position: "absolute",
+          left: "-40px",
+          "@media (max-width: 900px)": {
+            display: "none",
+          },
+        }}
+      >
+        HOT
+      </span>
+    )}
     {valueLabel}
   </div>
 );
@@ -35,9 +47,46 @@ function Filter() {
         alignItems: "flex-end",
         gap: "0.6rem",
         padding: "1rem 2rem",
+
+        "@media (max-width: 900px)": {
+          flexDirection: "row",
+          alignItems: "flex-start",
+          padding: "0.5rem 1.5rem 1rem 1.5rem",
+        },
+
+        "@media (max-width: 500px)": {
+          padding: "0.3rem 1.5rem 1rem 1rem",
+        },
       }}
     >
-      <RadioGroup value={top} onChange={setTop}>
+      <RadioGroup
+        value={top}
+        onChange={setTop}
+        css={{
+          "@media (max-width: 900px)": {
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "0.8rem",
+          },
+        }}
+      >
+        <div
+          css={{
+            position: "relative",
+            color: Color.yellow,
+            fontFamily: Font.logo,
+            fontSize: "1rem",
+            margin: "0.3rem 0",
+            borderBottom: `3px solid ${Color.transparent}`,
+
+            "@media (min-width: 901px)": {
+              display: "none",
+            },
+          }}
+        >
+          HOT
+        </div>
         <RadioGroup.Option value="5">
           {({ checked }) => <Option checked={checked} valueLabel="05" />}
         </RadioGroup.Option>

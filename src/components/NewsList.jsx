@@ -96,8 +96,12 @@ function NewsList() {
         overflowX: "hidden",
         display: "flex",
         justifyContent: "center",
-        border: `1rem solid ${Color.darkBlue}`,
+        borderTop: `1rem solid ${Color.darkBlue}`,
         borderBottom: `1rem solid ${Color.darkBlue}`,
+
+        "@media (max-width: 900px)": {
+          flexDirection: "column",
+        },
       }}
     >
       <LeftSidebar />
@@ -108,6 +112,10 @@ function NewsList() {
           marginLeft: "50px",
           marginRight: "auto",
           position: "relative",
+
+          "@media (max-width: 1200px)": {
+            marginLeft: "20px",
+          },
         }}
         key={refreshKey}
       >

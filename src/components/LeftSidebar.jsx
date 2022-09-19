@@ -26,6 +26,28 @@ function LeftSidebar() {
           flexDirection: "column",
           justifyContent: "space-between",
           borderRight: `2px solid ${Color.blueLite}`,
+
+          "@media (max-width: 1200px)": {
+            width: "calc(100vw/8)",
+          },
+
+          "@media (max-width: 900px)": {
+            flexDirection: "row",
+            position: "fixed",
+            width: "100vw",
+            top: "unset",
+            bottom: 0,
+            right: 0,
+            zIndex: 1,
+            height: "60px",
+            backgroundColor: Color.darkBlue,
+            borderTop: `2px solid ${Color.blueLite}`,
+            borderRight: 0,
+          },
+
+          "@media (max-width: 500px)": {
+            height: "50px",
+          },
         }}
       >
         <Filter />
@@ -34,6 +56,14 @@ function LeftSidebar() {
             display: "flex",
             flexDirection: "row-reverse",
             padding: "0 2rem",
+
+            "@media (max-width: 900px)": {
+              padding: "0 1rem",
+            },
+
+            "@media (max-width: 500px)": {
+              padding: "0 0.5rem",
+            },
           }}
         >
           <button
@@ -44,6 +74,14 @@ function LeftSidebar() {
               border: 0,
               padding: "1rem",
               cursor: "pointer",
+
+              "@media (max-width: 900px)": {
+                padding: "0.6rem",
+              },
+
+              "@media (max-width: 500px)": {
+                padding: "0.4rem",
+              },
             }}
             onClick={() => setIsSettingsopen(true)}
           >
@@ -56,6 +94,14 @@ function LeftSidebar() {
                 borderBottom: `3px solid ${Color.transparent}`,
                 ":hover": {
                   borderBottom: `3px solid ${Color.orange}`,
+                },
+
+                "@media (max-width: 900px)": {
+                  width: "24px",
+                },
+
+                "@media (max-width: 500px)": {
+                  width: "22px",
                 },
               }}
             />

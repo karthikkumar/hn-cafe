@@ -4,7 +4,7 @@ import { useQueryClient } from "react-query";
 import { useStateContext } from "../state";
 
 // images
-import logo from "../img/hn-cafe-logo.png";
+import logo from "../img/logo.png";
 
 const Settings = ({ isOpen, onClose }) => {
   const queryClient = useQueryClient();
