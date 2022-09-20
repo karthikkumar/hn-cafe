@@ -140,16 +140,15 @@ function NewsList() {
           position: "relative",
 
           "@media (max-width: 1200px)": {
-            marginLeft: "20px",
+            margin: "0 20px",
           },
 
           "@media (max-width: 900px)": {
-            width: "98%",
+            width: "100%",
           },
 
           "@media (max-width: 500px)": {
-            marginLeft: 0,
-            marginRight: "10px",
+            margin: "0 5px",
           },
         }}
         key={refreshKey || top} // remount on filter change is required because rowVirtualizer.measure() is not quite working
