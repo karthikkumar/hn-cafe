@@ -14,7 +14,7 @@ import Error from "./Error";
 import { Color } from "../utils/css-vars";
 import StickyHeader from "./StickyHeader";
 import LeftSidebar from "./LeftSidebar";
-import { useWindowSize } from "../utils/hooks";
+import { useWindowSize, useMultipleRefs } from "../utils/hooks";
 
 function NewsList() {
   const {
@@ -57,6 +57,7 @@ function NewsList() {
   const { top: topFilter, stickyHeader, refreshKey } = useStateContext();
   const top = parseInt(topFilter);
   const { width } = useWindowSize();
+  const [getRefs, setRef] = useMultipleRefs();
 
   const rowVirtualizer = useVirtualizer({
     count: storiesByDates.length,
@@ -84,6 +85,10 @@ function NewsList() {
       }
     },
   });
+
+  useEffect(() => {
+    rowVirtualizer.measure();
+  }, [width, rowVirtualizer]);
 
   const [lastItem] = [...rowVirtualizer.getVirtualItems()].reverse();
 
@@ -118,10 +123,11 @@ function NewsList() {
         justifyContent: "center",
         borderTop: `1rem solid ${Color.darkBlue}`,
         borderBottom: `1rem solid ${Color.darkBlue}`,
-
-        "@media (max-width: 900px)": {
-          flexDirection: "column",
-        },
+      }}
+      onScroll={() => {
+        for (const ref of getRefs()) {
+          ref.current?.onScroll();
+        }
       }}
     >
       <LeftSidebar />
@@ -169,7 +175,7 @@ function NewsList() {
                 paddingBottom: "50px",
               }}
             >
-              <DateHeader date={date} />
+              <DateHeader date={date} ref={setRef(virtualRow.index)} />
               {stories.slice(0, top).map((story, index) => (
                 <NewsItem
                   rank={index + 1}

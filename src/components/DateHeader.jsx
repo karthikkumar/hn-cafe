@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import { useRef, useEffect, useState } from "react";
+import { useRef, forwardRef, useImperativeHandle } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import { Color, Font } from "../utils/css-vars";
 import { useStateContext } from "../state";
-function DateHeader({ date }) {
+
+const DateHeader = forwardRef(({ date }, ref) => {
   const headerRef = useRef();
-  const [hide, setHide] = useState(false);
   const { setStickyHeader } = useStateContext();
 
   const diff = moment().diff(moment(date).startOf("date"), "days");
@@ -19,16 +19,14 @@ function DateHeader({ date }) {
     dateLabel = date.format("D, MMMM");
   }
 
-  // eslint-disable-next-line
-  useEffect(() => {
-    const { top } = headerRef.current?.getBoundingClientRect();
-    if (top < 50) {
-      setHide(true);
-      setStickyHeader(dateLabel);
-    } else {
-      setHide(false);
-    }
-  });
+  useImperativeHandle(ref, () => ({
+    onScroll: () => {
+      const { top } = headerRef.current?.getBoundingClientRect();
+      if (top < 20) {
+        setStickyHeader(dateLabel);
+      }
+    },
+  }));
 
   if (!date) {
     return null;
@@ -40,7 +38,6 @@ function DateHeader({ date }) {
       css={{
         height: "1.2rem",
         backgroundColor: Color.darkBlue,
-        visibility: hide ? "hidden" : "visible",
       }}
     >
       <div
@@ -66,7 +63,7 @@ function DateHeader({ date }) {
       </div>
     </div>
   );
-}
+});
 
 DateHeader.propTypes = {
   date: PropTypes.object,

@@ -1,4 +1,4 @@
-import {
+import React, {
   useState,
   useEffect,
   useRef,
@@ -186,10 +186,24 @@ function useWindowSize() {
   return windowSize;
 }
 
+function useMultipleRefs() {
+  const refs = [];
+
+  const setRef = () => {
+    const ref = React.createRef();
+    refs.push(ref);
+    return ref;
+  };
+
+  const getRefs = () => refs;
+  return [getRefs, setRef];
+}
+
 export {
   useAsync,
   useLocalStorage,
   useIntersection,
   useDocumentEvent,
   useWindowSize,
+  useMultipleRefs,
 };
