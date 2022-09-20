@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef } from "react";
 import { useInfiniteQuery } from "react-query";
-import { useVirtual } from "react-virtual";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import moment from "moment";
 import NewsItem from "./NewsItem";
 import DateHeader from "./DateHeader";
@@ -14,8 +14,7 @@ import Error from "./Error";
 import { Color } from "../utils/css-vars";
 import StickyHeader from "./StickyHeader";
 import LeftSidebar from "./LeftSidebar";
-
-const FilterSet = { 5: 1, 10: 2, 20: 4, 30: 6 };
+import { useWindowSize } from "../utils/hooks";
 
 function NewsList() {
   const {
@@ -57,14 +56,36 @@ function NewsList() {
   const parentRef = useRef();
   const { top: topFilter, stickyHeader, refreshKey } = useStateContext();
   const top = parseInt(topFilter);
+  const { width } = useWindowSize();
 
-  const rowVirtualizer = useVirtual({
-    size: storiesByDates.length,
-    parentRef,
-    estimateSize: useCallback(() => 330 * FilterSet[top] + 70, [top]),
+  const rowVirtualizer = useVirtualizer({
+    count: storiesByDates.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: (index) => {
+      if (storiesByDates.length) {
+        let total = 150; // padding and date row
+        const minItemHeight = 37; // other elements
+        const items = storiesByDates[index];
+        items.stories.slice(0, top).forEach(({ title }) => {
+          // finding number of lines by title's length is rough
+          // accurate size is not required here
+          let charLen = title.length;
+          if (width <= 500) {
+            charLen = 25;
+          } else if (width <= 900) {
+            charLen = 50;
+          }
+          const titleLines = Math.round(title.length / charLen);
+          const titleHeight = titleLines * 22;
+          const itemHeight = titleHeight + minItemHeight;
+          total += itemHeight;
+        });
+        return total;
+      }
+    },
   });
 
-  const [lastItem] = [...rowVirtualizer.virtualItems].reverse();
+  const [lastItem] = [...rowVirtualizer.getVirtualItems()].reverse();
 
   useEffect(() => {
     if (!lastItem) {
@@ -84,7 +105,6 @@ function NewsList() {
     fetchNextPage,
     storiesByDates.length,
     isFetchingNextPage,
-    rowVirtualizer.virtualItems,
   ]);
 
   return (
@@ -107,7 +127,7 @@ function NewsList() {
       <LeftSidebar />
       <div
         css={{
-          height: `${rowVirtualizer.totalSize}px`,
+          height: `${rowVirtualizer.getTotalSize()}px`,
           width: "800px",
           marginLeft: "50px",
           marginRight: "auto",
@@ -116,26 +136,37 @@ function NewsList() {
           "@media (max-width: 1200px)": {
             marginLeft: "20px",
           },
+
+          "@media (max-width: 900px)": {
+            width: "98%",
+          },
+
+          "@media (max-width: 500px)": {
+            marginLeft: 0,
+            marginRight: "10px",
+          },
         }}
-        key={refreshKey}
+        key={refreshKey || top} // remount on filter change is required because rowVirtualizer.measure() is not quite working
       >
         {!storiesByDates.length && isLoading && <Loading />}
         {!storiesByDates.length && isError && <Error />}
         {stickyHeader && <StickyHeader title={stickyHeader} />}
-        {rowVirtualizer.virtualItems.map((virtualRow) => {
+        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
           const { date, stories } = storiesByDates.length
             ? storiesByDates[virtualRow.index]
             : {};
           return (
             <div
               key={virtualRow.index}
+              ref={virtualRow.measureElement}
               css={{
                 position: "absolute",
                 top: 0,
                 left: 0,
                 width: "100%",
-                height: `${virtualRow.size}px`,
+                height: "max-contents",
                 transform: `translateY(${virtualRow.start}px)`,
+                paddingBottom: "50px",
               }}
             >
               <DateHeader date={date} />

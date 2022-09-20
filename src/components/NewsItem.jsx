@@ -34,6 +34,18 @@ function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
               visibility: "visible",
             },
           },
+
+          "@media (max-width: 900px)": {
+            cursor: "pointer",
+            ":hover": {
+              "#hidden": {
+                visibility: "hidden",
+              },
+            },
+          },
+        }}
+        onClick={(event) => {
+          console.log({ event });
         }}
       >
         <div
@@ -81,6 +93,14 @@ function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
               ":hover": {
                 borderBottom: `1.5px solid ${Color.white}`,
               },
+
+              "@media (max-width: 900px)": {
+                width: "100%",
+                pointerEvents: "none",
+                ":hover": {
+                  borderBottom: `1.5px solid ${Color.transparent}`,
+                },
+              },
             }}
             onClick={() => {
               setLocalStorage(LocalStorageKey.ReadList, (list = []) =>
@@ -112,12 +132,28 @@ function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
                     ":hover": {
                       borderBottom: `1px solid ${Color.lightBlue}`,
                     },
+
+                    "@media (max-width: 900px)": {
+                      pointerEvents: "none",
+                      ":hover": {
+                        borderBottom: `1px solid ${Color.transparent}`,
+                      },
+                    },
                   }}
                 >
                   {hostname || "news.ycombinator.com"}
                 </a>
               </small>
-              <small id="hidden" css={{ visibility: "hidden" }}>
+              <small
+                id="hidden"
+                css={{
+                  visibility: "hidden",
+
+                  "@media (max-width: 900px)": {
+                    display: "none",
+                  },
+                }}
+              >
                 <p>
                   {`by `}
                   <a
@@ -161,6 +197,10 @@ function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
                   "#comments": {
                     borderBottom: `1px solid ${Color.commentsColor}`,
                   },
+                },
+
+                "@media (max-width: 900px)": {
+                  display: "none",
                 },
               }}
               onClick={(e) => {
