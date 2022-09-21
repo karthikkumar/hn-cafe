@@ -13,7 +13,7 @@ function Modal({ children, onClose }) {
         left: 0,
         justifyContent: "center",
         alignItems: "center",
-        zIndex: 1,
+        zIndex: 2,
         backgroundColor: Color.blueLite,
       }}
       onClick={onClose}
