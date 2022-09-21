@@ -16,10 +16,7 @@ function Modal({ children, onClose }) {
         zIndex: 1,
         backgroundColor: Color.blueLite,
       }}
-      onClick={(e) => {
-        e.stopPropagation();
-        onClose();
-      }}
+      onClick={onClose}
     >
       {children}
     </div>,

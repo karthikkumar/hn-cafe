@@ -27,7 +27,7 @@ const Settings = ({ isOpen, onClose }) => {
         }}
       />
       <div
-        style={{
+        css={{
           display: "flex",
           position: "fixed",
           top: 0,
@@ -36,6 +36,11 @@ const Settings = ({ isOpen, onClose }) => {
           left: 0,
           justifyContent: "center",
           alignItems: "center",
+
+          "@media (max-width: 900px)": {
+            alignItems: "flex-end",
+            marginBottom: "10vh",
+          },
         }}
         onClick={(e) => {
           e.stopPropagation();
@@ -43,22 +48,33 @@ const Settings = ({ isOpen, onClose }) => {
         }}
       >
         <div
-          style={{
+          css={{
             backgroundColor: Color.darkBlue,
             width: "960px",
             borderRadius: "10px",
             padding: "2rem 3rem",
+
+            "@media (max-width: 1000px)": {
+              width: "95%",
+              padding: "1.5rem",
+            },
           }}
           onClick={(e) => e.stopPropagation()}
         >
           <div
             css={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
+              gridTemplateAreas: `"story settings" "footer footer"`,
               gridTemplateRows: "4fr 0.5fr",
+
+              "@media (max-width: 900px)": {
+                gridTemplateAreas: `"story" "settings" "footer"`,
+                gridTemplateRows: "max-content",
+                rowGap: "1rem",
+              },
             }}
           >
-            <div>
+            <div css={{ gridArea: "story" }}>
               <div>
                 <div css={{ display: "flex", gap: "1rem" }}>
                   <div>
@@ -154,6 +170,7 @@ const Settings = ({ isOpen, onClose }) => {
             </div>
             <div
               css={{
+                gridArea: "settings",
                 height: "100%",
                 borderLeft: `2px solid ${Color.blueLite}`,
                 paddingLeft: "1rem",
@@ -163,9 +180,23 @@ const Settings = ({ isOpen, onClose }) => {
                 display: "flex",
                 flexDirection: "column",
                 gap: "2rem",
+
+                "@media (max-width: 900px)": {
+                  borderTop: `2px solid ${Color.blueLite}`,
+                  borderLeft: 0,
+                  paddingLeft: 0,
+                },
               }}
             >
-              <div css={{ fontFamily: Font.logo, fontWeight: "600" }}>
+              <div
+                css={{
+                  fontFamily: Font.logo,
+                  fontWeight: "600",
+                  "@media (max-width: 900px)": {
+                    marginTop: "1rem",
+                  },
+                }}
+              >
                 Settings
               </div>
               <div
@@ -177,6 +208,10 @@ const Settings = ({ isOpen, onClose }) => {
                   gridTemplateColumns: "1fr 3fr",
                   gridTemplateRowss: "1fr",
                   gap: "1rem",
+
+                  "@media (max-width: 900px)": {
+                    columnGap: "2rem",
+                  },
                 }}
               >
                 {/* <div>Theme</div>
@@ -258,6 +293,7 @@ const Settings = ({ isOpen, onClose }) => {
             </div>
             <div
               css={{
+                gridArea: "footer",
                 display: "flex",
                 alignItems: "flex-end",
                 flexDirection: "row-reverse",

@@ -4,9 +4,6 @@ import Modal from "./Modal";
 import { getItemURL } from "../utils";
 import { OpenLinkProps } from "../constants";
 
-// images
-import Y from "../img/Y.png";
-
 const NewsInfoModal = ({
   isOpen,
   onClose,
