@@ -15,7 +15,7 @@ const StickyHeader = ({ title }) => {
         justifyContent: "space-around",
         position: "sticky",
         top: "0px",
-        zIndex: 2,
+        zIndex: 1,
         backgroundColor: Color.darkBlue,
         height: "1.2rem",
       }}

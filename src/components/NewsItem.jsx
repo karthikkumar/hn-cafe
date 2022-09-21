@@ -1,26 +1,65 @@
 /** @jsxImportSource @emotion/react */
+import { useState } from "react";
 import moment from "moment";
 import { Color, Font } from "../utils/css-vars";
-import { LocalStorageKey, getLocalStorage, setLocalStorage } from "../utils";
+import {
+  LocalStorageKey,
+  getLocalStorage,
+  setLocalStorage,
+  getItemURL,
+} from "../utils";
+import NewsInfoModal from "./NewsInfoModal";
+import { OpenLinkProps } from "../constants";
 
 // images
 import Y from "../img/Y.png";
 
-const openLinkProps = { target: "_blank", rel: "noreferrer noopener" };
-
 function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
-  const { origin, hostname } = url ? new URL(url) : {};
-  const itemURL = `https://news.ycombinator.com/item?id=${id}`;
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
+  const { origin, hostname } = url
+    ? new URL(url)
+    : { hostname: "news.ycombinator.com" };
+  const itemURL = getItemURL(id);
 
-  const handleItemClick = () => {
+  const handleItemClick = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     window.open(itemURL);
+  };
+
+  const handleURLClick = (event) => {
+    event.stopPropagation();
+    setLocalStorage(LocalStorageKey.ReadList, (list = []) =>
+      Array.from(new Set([...list]).add(id))
+    );
+  };
+
+  const handleClose = (event) => {
+    event.stopPropagation();
+    setIsInfoModalOpen(false);
   };
 
   const readList = getLocalStorage(LocalStorageKey.ReadList);
   const isRead = readList?.includes(id);
+  const timeAgo = moment.unix(time).fromNow();
 
   return (
     <>
+      <NewsInfoModal
+        isOpen={isInfoModalOpen}
+        onClose={handleClose}
+        id={id}
+        title={title}
+        url={url}
+        hostname={hostname}
+        by={by}
+        score={score}
+        timeAgo={timeAgo}
+        descendants={descendants}
+        isRead={isRead}
+        onURLClick={handleURLClick}
+        onItemClick={handleItemClick}
+      />
       <div
         css={{
           display: "flex",
@@ -45,7 +84,8 @@ function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
           },
         }}
         onClick={(event) => {
-          console.log({ event });
+          event.stopPropagation();
+          setIsInfoModalOpen(true);
         }}
       >
         <div
@@ -81,7 +121,7 @@ function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
         >
           <a
             href={url || itemURL}
-            {...openLinkProps}
+            {...OpenLinkProps}
             css={{
               textDecoration: "none",
               color: isRead ? Color.gray : Color.white,
@@ -102,11 +142,7 @@ function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
                 },
               },
             }}
-            onClick={() => {
-              setLocalStorage(LocalStorageKey.ReadList, (list = []) =>
-                Array.from(new Set([...list]).add(id))
-              );
-            }}
+            onClick={handleURLClick}
           >
             {title}
           </a>
@@ -123,7 +159,7 @@ function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
               <small css={{ color: Color.lightBlue, marginRight: "1rem" }}>
                 <a
                   href={origin || itemURL}
-                  {...openLinkProps}
+                  {...OpenLinkProps}
                   css={{
                     textDecoration: "none",
                     color: Color.lightBlue,
@@ -141,7 +177,7 @@ function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
                     },
                   }}
                 >
-                  {hostname || "news.ycombinator.com"}
+                  {hostname}
                 </a>
               </small>
               <small
@@ -158,7 +194,7 @@ function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
                   {`by `}
                   <a
                     href={`https://news.ycombinator.com/user?id=${by}`}
-                    {...openLinkProps}
+                    {...OpenLinkProps}
                     css={{
                       textDecoration: "none",
                       color: Color.lightBlue,
@@ -203,14 +239,10 @@ function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
                   display: "none",
                 },
               }}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                handleItemClick();
-              }}
+              onClick={handleItemClick}
             >
               <small id="time" css={{ color: Color.yellow }}>
-                <p>{moment.unix(time).fromNow()}</p>
+                <p>{timeAgo}</p>
               </small>
               <small id="points" css={{ color: Color.pointsColor }}>
                 <p>{score} points</p>
@@ -220,7 +252,7 @@ function NewsItem({ id, rank, title, url, by, score, time, descendants }) {
               </small>
               <a
                 href={itemURL}
-                {...openLinkProps}
+                {...OpenLinkProps}
                 css={{ textDecoration: "none", height: "15px" }}
               >
                 <img

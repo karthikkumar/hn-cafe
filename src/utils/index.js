@@ -25,4 +25,6 @@ const setLocalStorage = (key, value) => {
   }
 };
 
-export { LocalStorageKey, getLocalStorage, setLocalStorage };
+const getItemURL = (id) => `https://news.ycombinator.com/item?id=${id}`;
+
+export { LocalStorageKey, getLocalStorage, setLocalStorage, getItemURL };
