@@ -1,11 +1,14 @@
-import Providers from "./Providers";
-import Container from "./components/Container";
+import { lazy, Suspense } from "react";
+
+import Brewing from "./components/Brewing";
+
+const AppContainer = lazy(() => import("./components/AppContainer"));
 
 function App() {
   return (
-    <Providers>
-      <Container />
-    </Providers>
+    <Suspense fallback={<Brewing />}>
+      <AppContainer />
+    </Suspense>
   );
 }
 

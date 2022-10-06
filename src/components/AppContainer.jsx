@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
+import Providers from "../Providers";
 import NewsList from "./NewsList";
 import { Color } from "../utils/css-vars";
 
-function Container() {
+function AppContainer() {
   return (
     <div
       css={{
@@ -12,9 +13,11 @@ function Container() {
         backgroundColor: Color.darkBlue,
       }}
     >
-      <NewsList />
+      <Providers>
+        <NewsList />
+      </Providers>
     </div>
   );
 }
 
-export default Container;
+export default AppContainer;
