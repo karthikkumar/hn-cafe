@@ -15,7 +15,7 @@ const Settings = ({ isOpen, onClose }) => {
   }
 
   return (
-    <div css={{ position: "fixed", zIndex: 1 }}>
+    <div css={{ position: "fixed", zIndex: 2 }}>
       <div
         css={{
           position: "fixed",
