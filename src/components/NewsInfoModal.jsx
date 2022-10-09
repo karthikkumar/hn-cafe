@@ -144,7 +144,10 @@ const NewsInfoModal = ({
             }}
           >
             <button
-              onClick={onURLClick}
+              onClick={(event) => {
+                onURLClick(event);
+                window.open(url || itemURL);
+              }}
               css={{
                 backgroundColor: Color.transparent,
                 border: 0,
