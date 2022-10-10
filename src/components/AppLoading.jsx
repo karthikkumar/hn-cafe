@@ -1,6 +1,6 @@
 import { Color } from "../utils/css-vars";
 
-function Brewing() {
+function AppLoading() {
   return (
     <div
       style={{
@@ -15,9 +15,9 @@ function Brewing() {
         fontSize: "2rem",
       }}
     >
-      Brewing...
+      Opening...
     </div>
   );
 }
 
-export default Brewing;
+export default AppLoading;
