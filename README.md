@@ -1,1 +1,1 @@
-# HN Cafe
+# hackernews.today
